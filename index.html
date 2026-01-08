@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lupita Vásquez-Fabela</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sekuya&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===================== */
+    /* RESET */
+    /* ===================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===================== */
+    /* FULLSCREEN HERO */
+    /* ===================== */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Video background */
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    /* Dark overlay */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 2;
+    }
+
+    /* Overlay base */
+    .overlay {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: white;
+    }
+
+    /* HERO TEXT */
+    .text-container {
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .overlay h1 {
+      font-family: 'Sekuya', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+      text-shadow:
+        0 0 12px rgba(140, 80, 255, 0.35),
+        0 0 30px rgba(80, 60, 255, 0.25);
+    }
+
+    /* Subtitles */
+    .subtitle {
+      letter-spacing: 0.04em;
+      font-family: 'Atkinson Hyperlegible', monospace;
+    }
+
+    .subtitle.primary {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle.secondary {
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    /* ===================== */
+    /* PUBLICATIONS SECTION */
+    /* ===================== */
+    .publications-overlay {
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 4rem;
+      height: 100%;
+    }
+
+    
+    /* Wrapper should use flex column */
+    .publications-wrapper {
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* full height of the overlay */
+    }
+    .publications-title {
+      font-family: 'Atkinson Hyperlegible', monospace;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* List */
+    .publications-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-top: auto;
+    }
+
+    /* Publication item */
+    .publication-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: stretch;
+      background: transparent;
+      padding: 0;
+    }
+
+    /* Text container */
+    .publication-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      font-family: 'Atkinson Hyperlegible', monospace;
+      flex: 1;
+    }
+
+    .publication-text h2 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .publication-text p {
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .publication-links a {
+      font-size: 0.85rem;
+      color: white;
+      text-decoration: none;
+      margin-right: 1rem;
+      opacity: 0.85;
+      font-family: 'Atkinson Hyperlegible', monospace;
+    }
+
+    .publication-links a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+
+    /* Make publication covers match letter-sized proportions */
+    .publication-cover {
+        width: 150px; /* your desired width */
+        height: calc(150px / 0.773); /* proportional height for letter-sized paper */
+        border-radius: 6px;
+        flex-shrink: 0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        object-fit: cover; /* ensures the image fills the box nicely */
+        margin-left: auto; 
+    }
+
+
+    /* Year */
+    .publication-year {
+      font-weight: normal;
+      opacity: 0.7;
+      margin-left: 0.4rem;
+    }
+
+
+    /* ABOUT SECTION */
+.about {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.about-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Overlay reuse (if you already have this, you can skip duplicates) */
+.about .overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  box-sizing: border-box;
+}
+
+/* Content layout */
+.about-content {
+  display: flex;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1400px;
+  height: 80vh;
+}
+
+/* LEFT COLUMN */
+.about-left {
+  flex: 1;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.about-left h2 {
+  font-family: 'Sekuya', serif;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 100;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+  text-shadow:
+    0 0 12px rgba(140, 80, 255, 0.25),
+    0 0 25px rgba(80, 60, 255, 0.2);
+}
+
+
+.about-description {
+  font-family: 'Atkinson Hyperlegible', monospace;
+  max-width: 420px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.95;
+}
+
+
+/* RIGHT COLUMN */
+.about-right {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resume-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+}
+.resume-viewer {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.resume-viewer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+  border-radius: 8px;
+}
+.resume-card {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  background: #fafafa;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.resume-header span {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.resume-header a {
+  font-family: 'Atkinson Hyperlegible', monospace;
+  text-decoration: none;
+  color: #000;
+  opacity: 0.7;
+  font-size: 0.85rem;
+}
+
+.resume-header a:hover {
+  opacity: 1;
+}
+
+.resume-card iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+
+/* VISUAL DESIGN SECTION */
+
+.visual-design {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: black;
+  color: white;
+}
+
+.visual-overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.visual-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  display: flex;
+  gap: 4rem;
+}
+
+/* LEFT COLUMN */
+.visual-left {
+  flex: 1;
+}
+
+.visual-left h2 {
+  font-family: 'Sekuya', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 4rem;
+  letter-spacing: 0.02em;
+}
+
+
+.visual-description {
+  font-family: 'Atkinson Hyperlegible', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  max-width: 420px;
+  opacity: 0.95;
+}
+
+
+/* RIGHT COLUMN */
+.visual-right {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 5rem;
+}
+
+.visual-right video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .visual-content {
+    flex-direction: column;
+  }
+
+  .visual-right {
+    grid-template-columns: 1fr;
+  }
+}
+
+.linkedin-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.55rem 1.2rem;
+  font-family: 'Atkinson Hyperlegible', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  background: #0A66C2; /* LinkedIn Blue */
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s ease;
+}
+
+.linkedin-button:hover {
+  background: #004182;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.site-footer {
+  width: 100%;
+  text-align: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-family: 'Atkinson Hyperlegible', monospace;
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 10;
+}
+/* Accessible magenta CTA buttons */
+.publication-links a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.2rem;
+
+  background-color: #d100b8; /* magenta with strong contrast on black */
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 999px; /* pill-style button */
+
+  transition: 
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* Hover */
+.publication-links a:hover {
+  background-color: #e600cc;
+  transform: translateY(-1px);
+}
+
+/* Keyboard focus (WCAG compliant) */
+.publication-links a:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Active / pressed */
+.publication-links a:active {
+  transform: translateY(0);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO / INTRO -->
+  <section class="hero">
+    <video
+      class="hero-video"
+      src="video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    ></video>
+
+    <div class="overlay">
+      <div class="text-container">
+        <h1>Lupita Vásquez Fabela</h1>
+
+        <p class="subtitle primary">
+          Chemist · Creative Technologist
+        </p>
+
+        <p class="subtitle secondary">
+          Exploring applied philosophical pragmatism in tech. 
+          <br />Currently doing orchestration layers of "working memory" <br />for LLM-powered web applications<br />
+          <br />
+          MFA Design & Technology — Parsons School of Design<br />
+          BSc Chemistry — UNAM (Universidad Nacional Autónoma de México, Facultad de Química)
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / RESUME SECTION -->
+<section class="about">
+    <video
+      class="about-video"
+      src="video-4.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    ></video>
+  
+    <div class="overlay">
+      <div class="about-content">
+        
+        <!-- LEFT: PROFILE -->
+        <div class="about-left">
+          <img
+            src="profile.png"
+            alt="Lupita Vásquez Fabela"
+            class="profile-image"
+          />
+  
+          <h2>Lupita Vásquez Fabela</h2>
+  
+          <p class="about-description">
+            Chemist and creative technologist working at the intersection of
+            design, computation, and philosophy. Interested in applied
+            pragmatism, orchestration layers, and human-centered systems for
+            LLM-powered applications.
+          </p>
+
+        </div>
+  
+       <!-- RIGHT: RESUME -->
+<div class="about-right">
+    <div class="resume-card">
+      <div class="resume-header">
+        <span>Curriculum Vitae</span>
+        <a href="resume.pdf" target="_blank" rel="noopener">
+          Download PDF
+        </a>
+                  <!-- LinkedIn Button -->
+<a
+href="https://www.linkedin.com/in/your-profile" 
+target="_blank" 
+rel="noopener" 
+>
+Connect on LinkedIn
+</a>
+      </div>
+  
+      <iframe
+        src="resume.pdf#view=FitH"
+        title="Résumé – Lupita Vásquez Fabela"
+      ></iframe>
+    </div>
+  </div>
+  
+  
+  
+      </div>
+    </div>
+  </section>
+  
+
+
+
+ <!-- DESIGN FOR ACCESSIBILITY -->
+<section class="hero">
+    <video
+      class="hero-video"
+      src="video-3.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    ></video>
+  
+    <div class="overlay publications-overlay">
+      <div class="publications-wrapper">
+  
+        <h1 class="publications-title">Design for Accessibility</h1>
+  
+        <ul class="publications-list">
+  
+          <!-- ITEM 1 -->
+          <li class="publication-item">
+            <div class="publication-text">
+              <h2>
+                An AI agent with a lightweight interface and backend layer to optimize LLM short-term memory during document creation, reducing token usage and computational cost while optimizing content quality and increasing user cognitive engagement.
+                <span class="publication-year">(2025)</span>
+              </h2>
+  
+              <p>
+                Can accessible design be the key to greener, more responsible generative AI? The use of Large Language Models (LLMs) in productivity has surged in recent years, and they are mostly found in the form of chat-based interfaces. But what happens when we design for cognitive accessibility beyond chatbots? What happens when we go beyond the with WCAG guidelines, ensuring usability and building strategic "working memories" and strategic data visualizations to catalyze task completion? Computational efficiency and energy savings seem one collateral benefit we might find along the way.
+              </p>
+  
+              <div class="publication-links">
+                <a href="eleva.html" aria-label="See more about Eleva project">
+                  See more…
+                </a>
+              </div>
+            </div>
+  
+            <img
+              src="logo-white-nano.gif"
+              alt="Eleva project cover"
+              class="publication-cover"
+            />
+          </li>
+  
+          <!-- ITEM 2 -->
+          <li class="publication-item">
+            <div class="publication-text">
+              <h2>
+                Can haptic devices, or devices that make use of tactile cues, help us improve horse-riding therapy lessons for nonverbal kids in the spectrum?
+                <span class="publication-year">(2024)</span>
+              </h2>
+  
+              <p>
+                A set of digital reins with hand warmers seems to help nonverbal kids with autism during their therapy horse riding lessons.
+              </p>
+  
+              <div class="publication-links">
+                <a href="reins.html" aria-label="See more about Digital Reins project">
+                  See more…
+                </a>
+              </div>
+            </div>
+  
+            <img
+              src="covers/digital-reins.png"
+              alt="Digital reins project cover"
+              class="publication-cover"
+            />
+          </li>
+  
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="visual-design">
+    <div class="visual-overlay">
+      <div class="visual-content">
+        
+        <!-- LEFT: TEXT -->
+        <div class="visual-left">
+          <h2>Crystallization and Dissolution, Accelerated</h2>
+  
+          <p class="visual-description">
+             This series explores the interplay of light, color, and matter at the microscopic scale. Using polarized light microscopy, I recorded sodium chloride (NaCl, or table salt), magnesium sulfate heptahydrate (MgSO₄·7H₂O, or Epsom salts), sodium bicarbonate (NaHCO₃ or baking soda), and monoammonium phosphate (NH₄H₂PO₄) over 10 + hours of crystallization and dissolution. By accelerating the footage, the hidden behaviors of these salts—their growth, melting, and reformation—are revealed, along with the vibrant colors and patterns that emerge as polarized light passes through their crystalline structures. What unfolds is a dynamic choreography of light and matter, where scientific observation meets visual poetry.
+        </div>
+  
+        <!-- RIGHT: VIDEOS -->
+        <div class="visual-right">
+          <video src="video.mp4" autoplay muted loop playsinline></video>
+          <video src="video-2.mp4" autoplay muted loop playsinline></video>
+          <video src="video-3.mp4" autoplay muted loop playsinline></video>
+          <video src="video-4.mp4" autoplay muted loop playsinline></video>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+    <!-- PUBLICATIONS -->
+    <section class="hero">
+        <video
+          class="hero-video"
+          src="video-2.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+    
+        <div class="overlay publications-overlay">
+          <div class="publications-wrapper">
+    
+            <h1 class="publications-title">Publications</h1>
+    
+            <ul class="publications-list">
+    
+                <li class="publication-item">
+                    <div class="publication-text">
+                      <h2>
+                        Philosophical Pragmatism and Design as a Workaround to Common Fallacies in Executive Function Enhancement through Artificial Intelligence: A Reflection on Neuralink and ChatGPT
+                        <span class="publication-year">(2025)</span>
+                      </h2>
+        
+                      <p>
+                        The cycles of expectation-disappointment in AI can be seen as an invitation to make a reflection on the philosophical foundations of our approaches, especially when it comes to the development of technologies that are invasive to the human body.
+                      </p>
+        
+                      <div class="publication-links">
+                        <a href="pdfs/another-publication-en.pdf" target="_blank" rel="noopener">
+                          English PDF
+                        </a>
+                      </div>
+                    </div>
+        
+                    <img
+                      src="covers/paper-cover.png"
+                      alt="cover"
+                      class="publication-cover"
+                    />
+                  </li>
+              <li class="publication-item">
+                <div class="publication-text">
+                  <h2>
+                    Undergraduate thesis: A pragmatist approach for new dynamic ontologies in chemistry
+                    <span class="publication-year">(2022)</span>
+                  </h2>
+    
+                  <p>
+                    A pragmatist standpoint can be adopted legitimately in chemistry, whose knowledge is validated by the scientific method; observation perfectly matches the pragmatist concept of “sensible effects”. I go beyond the paradigm that conceives chemistry as totally reducible to physics to approach problems of 21st century philosophy of chemistry. Regarding time, I found out that time intervals in which emergent chemical phenomena occur must necessarily be continuums and the length of these intervals must be longer than a certain minimum determined by a perceptive apparatus. As a consequence, the properties that define chemical reactivity and identity are time-dependent. Since the facts we have access to are exhibited locally in our time dimension and those facts are the building blocks of the ontological frameworks in which reality emerges for us, I conclude that the chemical reality described in science must also be temporarily local.
+                  </p>
+    
+                  <div class="publication-links">
+                    <a href="pdfs/thesis-en.pdf" target="_blank" rel="noopener">
+                      English PDF
+                    </a>
+                    <a href="pdfs/thesis-es.pdf" target="_blank" rel="noopener">
+                      Spanish PDF
+                    </a>
+                  </div>
+                </div>
+    
+                <img
+                  src="covers/thesis-cover.png"
+                  alt="cover"
+                  class="publication-cover"
+                />
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+  
+
+  <script>
+    // Select all videos on the page
+    const allVideos = document.querySelectorAll("video");
+  
+    allVideos.forEach(video => {
+      // Safari / old browser fallback for loop
+      video.addEventListener("ended", () => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      });
+  
+      // Resume playback after tab switch
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && video.paused) {
+          video.play().catch(() => {});
+        }
+      });
+    });
+  </script>
+  
+  <footer class="site-footer">
+    <p>© 2026 Lupita Vásquez Fabela. All rights reserved.</p>
+  </footer>
+  
+</body>
+</html>

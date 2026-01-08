@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eleva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Atkinson+Hyperlegible:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: white;
+    }
+
+    /* FULLSCREEN HERO */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 2;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 4rem;
+    }
+
+    .text-container {
+      max-width: 800px;
+    }
+
+    h1 {
+      font-family: 'Sekuya', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      text-shadow:
+        0 0 12px rgba(140, 80, 255, 0.35),
+        0 0 30px rgba(80, 60, 255, 0.25);
+    }
+
+    .subtitle {
+      font-family: 'Atkinson Hyperlegible', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle.primary {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle.secondary {
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    /* ABOUT SECTION */
+    .about {
+      padding: 6rem 4rem;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-family: 'Sekuya', serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .mission {
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+
+    .pillars h3 {
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .pillars p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    /* VENN DIAGRAM */
+    .venn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .venn-svg {
+      width: 100%;
+      max-width: 360px;
+      transform: scale(0.96);
+      animation: vennEnter 1.2s ease-out forwards;
+    }
+
+    @keyframes vennEnter {
+      to {
+        transform: scale(1);
+      }
+    }
+
+    /* DRAWING CIRCLES */
+    .venn-circle {
+      fill: transparent;
+      stroke: white;
+      stroke-width: 2;
+      stroke-dasharray: 565;
+      stroke-dashoffset: 565;
+      opacity: 0.9;
+      animation: drawCircle 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .circle-1 { animation-delay: 0.1s; }
+    .circle-2 { animation-delay: 0.4s; }
+    .circle-3 { animation-delay: 0.7s; }
+
+    @keyframes drawCircle {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* CENTER OVERLAP */
+    .venn-center {
+      fill: white;
+      opacity: 0;
+      transform-origin: center;
+      animation:
+        centerFade 0.6s ease forwards,
+        centerPulse 2.5s ease-in-out infinite;
+      animation-delay: 1.4s, 2.2s;
+    }
+
+    @keyframes centerFade {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes centerPulse {
+      0%, 100% {
+        opacity: 1;
+        filter: drop-shadow(0 0 0 rgba(255,255,255,0));
+      }
+      50% {
+        opacity: 0.85;
+        filter: drop-shadow(0 0 10px rgba(255,255,255,0.35));
+      }
+    }
+
+    /* REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+      }
+    }
+
+    /* ONGOING RESEARCH */
+.research {
+  background: #000;
+  color: white;
+  padding: 6rem 4rem 7rem;
+}
+
+.research-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Title */
+.research h2 {
+  font-family: 'Sekuya', serif;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.8rem;
+}
+
+/* Subtitle */
+.research-subtitle {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: none;
+  margin-bottom: 1.8rem;
+  opacity: 0.9;
+}
+
+/* Description */
+.research-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 720px;
+  margin-bottom: 3rem;
+  opacity: 0.85;
+}
+
+/* Video */
+.research-video-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.research-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  opacity: 0.92;
+}
+
+/* Subtle framing (optional but recommended) */
+.research-video-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+}
+
+/* ARTIFACT SECTION */
+.artifact {
+  background: #000;
+  color: white;
+  padding: 6rem 4rem 7rem;
+}
+
+/* INNER CONTAINER */
+.artifact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* TITLE */
+.artifact h2 {
+  font-family: 'Sekuya', serif;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 3rem;
+}
+
+/* TWO COLUMN GRID */
+.artifact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+/* LEFT IMAGE */
+.artifact-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.95;
+}
+
+/* RIGHT TEXT */
+.artifact-subtitle {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+}
+
+.artifact-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 460px;
+}
+
+/* TEXT BELOW GRID */
+.artifact-followup {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 720px;
+  opacity: 0.85;
+}
+
+/* FULL WIDTH IMAGE */
+.artifact-fullwidth {
+  margin-top: 4rem;
+  padding: 0 4rem;
+}
+
+.artifact-fullwidth img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .artifact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .artifact-description {
+    max-width: none;
+  }
+}
+
+/* QUESTION SECTION */
+.question {
+  background: #000;
+  color: white;
+  padding: 6rem 0 7rem;
+}
+
+/* TEXT CONTAINER */
+.question-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+/* TITLE */
+.question h2 {
+  font-family: 'Sekuya', serif;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.6rem;
+}
+
+/* DESCRIPTION */
+.question-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 720px;
+  opacity: 0.85;
+}
+
+/* IMAGE */
+.question-image {
+  margin-top: 4rem;
+  padding: 0 4rem;
+}
+
+.question-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.95;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .question-inner,
+  .question-image {
+    padding: 0 2rem;
+  }
+}
+/* PROPOSAL SECTION */
+.proposal {
+  background: #000;
+  color: white;
+  padding: 6rem 0 7rem;
+}
+
+/* INNER CONTAINER */
+.proposal-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+
+/* TITLE */
+.proposal h2 {
+  font-family: 'Sekuya', serif;
+  font-size: 2.4rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 2rem;
+}
+
+/* SUBTITLE */
+.proposal-subtitle {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+/* DESCRIPTION */
+.proposal-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin-bottom: 2.5rem;
+  max-width: 720px;
+}
+
+/* FULL WIDTH IMAGE (no padding) */
+.proposal-image-full img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 3rem;
+  opacity: 0.95;
+}
+
+/* GIF IMAGE */
+.proposal-gif-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 3rem;
+  opacity: 0.95;
+}
+
+/* PDF LINK CENTERED */
+.proposal-pdf {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.proposal-pdf a {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.proposal-pdf a:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .proposal-inner {
+    padding: 0 2rem;
+  }
+
+  .proposal-description {
+    max-width: 100%;
+  }
+}
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      color: white;
+    }
+
+    /* FULLSCREEN HERO */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 2;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 4rem;
+    }
+
+    .text-container {
+      max-width: 800px;
+    }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      letter-spacing: 0.04em;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      text-shadow:
+        0 0 12px rgba(140, 80, 255, 0.35),
+        0 0 30px rgba(80, 60, 255, 0.25);
+    }
+
+    .subtitle {
+      font-family: 'Atkinson Hyperlegible', monospace;
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle.primary {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle.secondary {
+      font-size: 0.85rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    /* ABOUT SECTION */
+    .about {
+      padding: 6rem 4rem;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    .mission {
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+
+    .pillars h3 {
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .pillars p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    /* VENN DIAGRAM */
+    .venn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .venn-svg {
+      width: 100%;
+      max-width: 360px;
+      transform: scale(0.96);
+      animation: vennEnter 1.2s ease-out forwards;
+    }
+
+    @keyframes vennEnter {
+      to { transform: scale(1); }
+    }
+
+    .venn-circle {
+      fill: transparent;
+      stroke: white;
+      stroke-width: 2;
+      stroke-dasharray: 565;
+      stroke-dashoffset: 565;
+      opacity: 0.9;
+      animation: drawCircle 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .circle-1 { animation-delay: 0.1s; }
+    .circle-2 { animation-delay: 0.4s; }
+    .circle-3 { animation-delay: 0.7s; }
+
+    @keyframes drawCircle {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .venn-center {
+      fill: white;
+      opacity: 0;
+      transform-origin: center;
+      animation:
+        centerFade 0.6s ease forwards,
+        centerPulse 2.5s ease-in-out infinite;
+      animation-delay: 1.4s, 2.2s;
+    }
+
+    @keyframes centerFade { to { opacity: 1; } }
+    @keyframes centerPulse {
+      0%,100% { opacity:1; filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
+      50% { opacity:0.85; filter: drop-shadow(0 0 10px rgba(255,255,255,0.35)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+    }
+
+    /* ONGOING RESEARCH */
+    .research { background: #000; color: white; padding: 6rem 4rem 7rem; }
+    .research-inner { max-width: 900px; margin: 0 auto; }
+    .research h2 { font-family: 'Inter', sans-serif; font-size: 2.4rem; letter-spacing: 0.04em; margin-bottom: 0.8rem; }
+    .research-subtitle { font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 1.8rem; opacity: 0.9; }
+    .research-description { font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.7; max-width: 720px; margin-bottom: 3rem; opacity: 0.85; }
+
+    /* ARTIFACT SECTION */
+    .artifact h2 { font-family: 'Inter', sans-serif; font-size: 2.4rem; letter-spacing: 0.04em; margin-bottom: 3rem; }
+    .artifact-subtitle { font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 1.2rem; opacity: 0.9; }
+    .artifact-description, .artifact-followup { font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.7; opacity: 0.85; }
+
+    /* QUESTION SECTION */
+    .question h2 { font-family: 'Inter', sans-serif; font-size: 2.4rem; letter-spacing: 0.04em; margin-bottom: 1.6rem; }
+    .question-description { font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.7; max-width: 720px; opacity: 0.85; }
+
+    /* PROPOSAL SECTION */
+    .proposal h2 { font-family: 'Inter', sans-serif; font-size: 2.4rem; letter-spacing: 0.04em; margin-bottom: 2rem; }
+    .proposal-subtitle { font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; margin-top: 2.5rem; margin-bottom: 1rem; opacity: 0.9; }
+    .proposal-description { font-family: 'Inter', sans-serif; font-size: 0.95rem; line-height: 1.7; opacity: 0.85; margin-bottom: 2.5rem; max-width: 720px; }
+    .proposal-pdf a { font-family: 'Atkinson Hyperlegible', sans-serif; font-weight: 700; font-size: 0.95rem; color: white; text-decoration: none; padding: 0.6rem 1.2rem; border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; transition: all 0.25s ease; }
+    .proposal-pdf a:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+    /* HERO GIF ON RIGHT */
+.overlay {
+  display: flex;
+  justify-content: space-between; /* Text left, GIF right */
+  align-items: center;
+  height: 100%;
+  padding: 2rem 4rem;
+  position: relative;
+  z-index: 3;
+}
+
+.hero-gif-container {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hero-gif {
+  max-width: 45vw; /* adjust size as needed */
+  height: auto;
+  object-fit: contain;
+}
+.proposal-canva-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(63, 69, 81, 0.16);
+}
+
+.proposal-canva-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.proposal-canva-link {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.proposal-canva-link a {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: white;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.proposal-canva-link a:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.flow-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.flow-step {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+  background: #111;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  text-align: center;
+  min-width: 160px;
+}
+
+.flow-arrow {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #666;
+}
+
+/* Responsive stacking */
+@media (max-width: 768px) {
+  .flow-diagram {
+    flex-direction: column;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+.proposal-gif-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: inherit; /* if the wrapper has rounded corners */
+}
+
+
+  </style>
+</head>
+
+<body>
+  <!-- HERO -->
+<section class="hero">
+    <div class="overlay">
+      <div class="text-container">
+        <h1>Eleva</h1>
+  
+        <p class="subtitle primary">
+          Accessibility infrastructure for human–AI work.<br />
+          Orchestration layers of working memory for LLM systems.<br /><br />
+        </p>
+      </div>
+  
+      <div class="hero-gif-container">
+        <img src="logo-white-nano.gif" alt="Eleva logo" class="hero-gif" />
+      </div>
+    </div>
+  </section>
+  
+   
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-inner">
+
+      <div class="venn-container">
+        <svg
+          class="venn-svg"
+          viewBox="0 0 400 320"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="160" cy="160" r="90" class="venn-circle circle-1" />
+          <circle cx="240" cy="160" r="90" class="venn-circle circle-2" />
+          <circle cx="200" cy="110" r="90" class="venn-circle circle-3" />
+
+          <path
+            class="venn-center"
+            d="
+              M200 150
+              C185 140 180 165 200 175
+              C220 165 215 140 200 150
+              Z
+            "
+          />
+        </svg>
+      </div>
+
+      <div class="about-text">
+        <h2>About us</h2>
+
+        <p class="mission">
+          A mission-driven service design consultancy specializing in
+          infrastructure for academic and school work assisted by LLMs,
+          with a focus on cognitive accessibility.
+        </p>
+
+        <div class="pillars">
+          <div>
+            <h3>Social impact</h3>
+            <p>Interfaces that respect attention, memory, and neurodiversity. Bringing measurable, objective outcomes in accessibility, and a reduction of energy demands by reducing computational costs through efficient systems. </p>
+          </div>
+
+          <div>
+            <h3>Technological innovation</h3>
+            <p>Grounded philosophy translated into usable systems. Driven by need: designing "working memory" layers for AI agents powered by LLMs. Leveraging interdisciplinary systems design.</p>
+          </div>
+
+          <div>
+            <h3>Business value</h3>
+            <p>Helping our clients optimize costs and seize incentives related to the development and adoption of technologies providing cognitive accessibility.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="research">
+    <div class="research-inner">
+  
+      <h2>A middleware layer for working memory between human interfaces and LLMs: a demo</h2>
+  
+      <p class="research-description">
+        This research explores a UI–backend orchestration layer that externalizes
+        “working memory” for LLM-assisted work. The system mediates context,
+        intent, and state across interactions, allowing users to reason,
+        revisit, and intervene in how memory is constructed, persisted, and
+        retrieved—without collapsing cognition into a single prompt or session.
+      </p>
+  
+      <div class="research-video-wrapper">
+        <video
+            class="research-video"
+            src="eleva.mp4"
+            controls
+            preload="auto"
+            playsinline
+        ></video>
+
+      </div>
+  
+    </div>
+  </section>
+
+  <section class="artifact">
+    <div class="artifact-inner">
+  
+      <!-- SECTION TITLE -->
+      <h2>Why do we need to re-think chat-based interfaces?</h2>
+  
+      <!-- TOP TWO COLUMNS -->
+      <div class="artifact-grid">
+  
+        <!-- LEFT: IMAGE -->
+        <div class="artifact-image">
+          <img src="eleva1.png" alt="Working memory system diagram" />
+        </div>
+  
+        <!-- RIGHT: TEXT -->
+        <div class="artifact-text">
+          <p class="artifact-subtitle">
+            A chat interface is conversationally intuitive but computationally inefficient.
+          </p>
+  
+          <p class="artifact-description">
+            A chat-based interface can become computationally inefficient 
+because standard transformer models scale quadratically with 
+context length. In an unoptimized chat structure, the “short-term 
+memory” includes all the previous messages in the next prompt.    
+
+          </p>
+        </div>
+  
+      </div>
+  
+      <!-- SINGLE COLUMN TEXT BELOW -->
+      <p class="artifact-followup">
+        If a conversation contains N tokens, generating each new token requires comparing it against all previous tokens, 
+resulting in O(N²) work. As chats grow longer, this dramatically increases computation, memory use, and response time
+—ultimately leading to higher energy consumption and a larger environmental footprint. This is why strategies like context 
+preservation, chunking, and minimizing unnecessary tokens are not just good UX practices; they are directly connected 
+to sustainability, accessibility, and more equitable AI systems.
+
+      </p>
+  
+    </div>
+  
+    <!-- FULL WIDTH IMAGE -->
+    <div class="artifact-fullwidth">
+      <img src="eleva2.png" alt="System flow visualization" />
+    </div>
+  </section>
+
+  <section class="question">
+    <div class="question-inner">
+  
+      <h2>How can a chat interface induce wasteful behaviors? </h2>
+  
+      <p class="question-description">
+        On top of the problem of the quadratic growth of the token usage in long conversations, chat-based UI with LLMs also induce or guide users to a misuse of the tool. The most evident could be that people can conceive a chat as a person to talk to about everything, and the lack of guidelines can allow users to try to use LLMs in ways they are not intended to (for example, using them as therapists, or for identity theft). But even in users who understand the limitations of LLMs, a chat-based user interface replicates common challenges associated to conversations. For example, having to be verbally fluent, or having the attention span to filter out what is important from what is not, common challenges for neurodivergent people. Also, overreliance on these tools can make us more dependent on them. “Give me the full code” is a perfect example of how we can process tokens unnecessarily, just for the sake of clarity, to prevent confusion, or for laziness, leading to computational and environmental waste.   
+      </p>
+  
+    </div>
+  
+    <!-- FULL WIDTH IMAGE -->
+    <div class="question-image">
+      <img
+        src="eleva3.png"
+        alt="Chat interface as cognitive scaffold"
+      />
+    </div>
+  </section>
+
+  <section class="proposal">
+    <div class="proposal-inner">
+  
+      <!-- TITLE -->
+      <h2>My proposal: an AI coding assistant with a middleware "working memory" layer </h2>
+  
+      <!-- FIRST SUBTITLE + DESCRIPTION -->
+      <p class="proposal-subtitle">
+        A unified layer for LLM-assisted knowledge work
+      </p>
+      <p class="proposal-description">
+        My project proposal is a web application with to assist and guide users generate code.  It  works as an 
+        accessibility  tool, meeting WCAG (Web Content Accessibility Guidelines) guidelines of chunking, and 
+        applying data visualization to substitute for short attention span limitations, helpful for everyone, but 
+        especially helpful and inclusive for neurodivergent users.
+        Our backend will process user prompts and build strategic, minimalistic data structures storing the 
+        relevant “context”, which will be the most recent code, to use as the “short-term memory” of the LLM agent, 
+        eliminating the need for chat-based structures. Our algorithm to restructure the short term memory, or 
+        attention, of our web application can be a solution to reduce the quadratic growth of the token usage 
+      </p>
+      <!-- FULL WIDTH IMAGE -->
+      <div class="proposal-image-full">
+        <img src="eleva5.png" alt="Proposal system diagram" />
+      </div>
+  
+      <!-- FULL WIDTH IMAGE -->
+      <div class="proposal-image-full">
+        <img src="eleva4.png" alt="Proposal system diagram" />
+      </div>
+
+  
+      <!-- SECOND SUBTITLE + DESCRIPTION -->
+      <p class="proposal-subtitle">
+        User flow
+      </p>
+      <!-- USER FLOW DIAGRAM -->
+<div class="flow-diagram" role="group" aria-label="User flow diagram">
+    <div class="flow-step">
+      <span>Prompt a description<br />of the app</span>
+    </div>
+  
+    <span class="flow-arrow" aria-hidden="true">→</span>
+  
+    <div class="flow-step">
+      <span>Get minimum<br />set of modules</span>
+    </div>
+  
+    <span class="flow-arrow" aria-hidden="true">→</span>
+  
+    <div class="flow-step">
+      <span>Add modules<br />as necessary</span>
+    </div>
+  
+    <span class="flow-arrow" aria-hidden="true">→</span>
+  
+    <div class="flow-step">
+      <span>Modify modules<br />and debug</span>
+    </div>
+  </div>
+  
+      <p class="proposal-description">
+        The system leverages chat interfaces, structured memory objects, and
+        visualization of memory traces to create a reflective and iterative workflow.
+        Users can inspect, revise, and replay contextual states seamlessly.
+      </p>
+  
+      <!-- PROPOSAL ANIMATION VIDEO -->
+        <div class="proposal-gif-wrapper">
+            <video
+            src="proposal-animation.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-label="Proposal interaction animation video"
+            ></video>
+        </div>
+  
+  
+      <!-- THIRD SUBTITLE -->
+      <p class="proposal-subtitle">
+       ONGOING RESEARCH
+      </p>
+  
+      <div class="proposal-canva-wrapper">
+        <iframe
+          src="https://www.canva.com/design/DAG9BNanZC8/IYSOwX-4wqtiPycnRjTOKw/view?embed"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
+      </div>
+      
+      <div class="proposal-canva-link">
+        <a
+          href="https://www.canva.com/design/DAG9BNanZC8/IYSOwX-4wqtiPycnRjTOKw/view"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View proposal in Canva
+        </a>
+      </div>
+  </section>
+</body>
+</html>

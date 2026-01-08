@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BIG FROOTS - Volunteering at GallopNYC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Atkinson+Hyperlegible:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* RESET */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 2;
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 4rem;
+    }
+
+    .text-container {
+      max-width: 800px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 12px rgba(140, 80, 255, 0.35),
+                   0 0 30px rgba(80, 60, 255, 0.25);
+    }
+
+    .subtitle.primary {
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ORGANIZATIONS */
+    .organizations, .digital-reins, .two-column {
+      padding: 4rem 2rem;
+    }
+
+    .organizations .container,
+    .digital-reins .container,
+    .two-column .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .org-column {
+      flex: 1 1 400px;
+      text-align: center;
+    }
+
+    .org-column img {
+      width: 200px;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+
+    .org-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .org-column p {
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .two-column .text, .digital-reins .description {
+      flex: 1 1 400px;
+    }
+
+    .two-column .image, .digital-reins .image {
+      flex: 1 1 400px;
+      text-align: center;
+    }
+
+    .two-column img, .digital-reins img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Background variations */
+    .bg-dark { background: #111; }
+    .bg-black { background: #000; }
+    .hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+    /* =========================
+       RESET + BASE ACCESSIBILITY
+       ========================= */
+       *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 100%; /* respects user zoom */
+    }
+
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #f2f2f2;
+      font-family: 'Atkinson Hyperlegible', system-ui, sans-serif;
+      font-size: 1.0625rem; /* ~17px */
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* =========================
+       GLOBAL TEXT
+       ========================= */
+    p,
+    li {
+      max-width: 65ch;
+      color: #eaeaea;
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+    }
+
+    strong {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    ul {
+      padding-left: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.6rem;
+    }
+
+    /* =========================
+       HEADINGS (CLEAR HIERARCHY)
+       ========================= */
+    h1,
+    h2,
+    h3 {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #ffffff;
+      font-weight: 500;
+      line-height: 1.25;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.75rem, 6vw, 5rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* =========================
+       FOCUS STYLES (KEYBOARD)
+       ========================= */
+    :focus-visible {
+      outline: 3px solid #9b8cff;
+      outline-offset: 3px;
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.55); /* AA contrast guarantee */
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      padding: 2rem 4rem;
+      max-width: 900px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      max-width: 60ch;
+      color: #f0f0f0;
+    }
+
+    /* =========================
+       SECTIONS
+       ========================= */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .bg-black {
+      background-color: #000;
+    }
+
+    .bg-dark {
+      background-color: #111;
+    }
+
+    /* =========================
+       ORGANIZATIONS
+       ========================= */
+    .org-column {
+      flex: 1 1 420px;
+      text-align: center;
+    }
+
+    .org-column img {
+      width: 180px;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    /* =========================
+       TWO COLUMN LAYOUT
+       ========================= */
+    .text,
+    .description {
+      flex: 1 1 440px;
+    }
+
+    .image {
+      flex: 1 1 440px;
+      text-align: center;
+    }
+
+    .image img {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 2rem;
+      }
+
+      section {
+        padding: 3.5rem 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.9rem;
+      }
+    }
+
+    /* =========================
+       REDUCED MOTION
+       ========================= */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+    <!-- HERO -->
+    <section class="hero">
+        <img
+        class="hero-image"
+        src="digital-reins-header.png"
+        alt="Digital reins used for haptic communication with non-verbal riders at GallopNYC"
+        />
+    
+        <div class="overlay">
+        <div class="text-container">
+            <h1>Digital reins</h1>
+            <p class="subtitle primary">
+            Digital reins with haptic or tactile feedback for communication with non-verbal riders in the spectrum (Autism Spectrum Disorders). Made by BIG FROOTS in collaboration with GallopNYC.
+            </p>
+        </div>
+        </div>
+    </section>
+  
+
+  <!-- ORGANIZATIONS -->
+  <section class="organizations bg-black">
+    <div class="container">
+      <div class="org-column">
+        <img src="big-froots-logo.png" alt="BIG FROOTS Logo">
+        <h3>BIG FROOTS, digital accessibility tools for kids</h3>
+        <p>
+          BIG FROOTS creates digital accessibility tools that enhance learning experiences for neurodivergent children. Their work spans digital, haptic, and tactile interfaces, empowering non-verbal autistic users and other communities with accessibility needs. By improving communication and interaction, their innovations benefit not only individual users but society as a whole.
+        </p>
+      </div>
+
+      <div class="org-column">
+        <img src="gallopnyc-logo.png" alt="GallopNYC Logo">
+        <h3>GallopNYC, changing the lives of newyorkers with disabilities</h3>
+        <p>
+          GallopNYC is a therapeutic horseback riding program providing equine-assisted activities for children and adults with physical, emotional, and cognitive disabilities. Their mission is to foster growth, confidence, and independence through riding.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="two-column bg-dark">
+    <div class="container">
+      <div class="text">
+        <h2>The Problem</h2>
+        <p>
+            Horse riding therapy lessons for neurodivergent individuals  
+            usually involve the assistance of one person to lead the horse 
+            and one or two people to assist the neurodivergent person get 
+            the instructions correctly. 
+            Some kids with autism (ASD) sometimes interrupt their lessons due 
+            to sensory sensitivities. For example, if the horse stops 
+            after walking for a bit, the interruption of the rythmic movements 
+            can cause some kids to feel uncomfortable and try to get 
+            off the horse, sometimes leaving them unable to finish the 
+            lesson. 
+            
+        </p>
+      </div>
+      <div class="image">
+        <img src="section1-image.webp" alt="Challenges illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- DIGITAL REINS SOLUTION -->
+  <section class="digital-reins bg-black">
+    <div class="container">
+      <div class="description">
+        <h2>Our solution: digital reins</h2>
+        <p>
+            BIG FROOTS' digital reins are an innovative assistive tool designed to support communication with non-verbal autistic riders through haptic and tactile feedback. By translating rider intent into subtle, responsive signals, they enhance interaction, focus, and engagement during riding sessions.
+        </p>
+        <p>
+            Following extensive research, we designed the rein holders, adding 
+            haptic feedback and hand warming technology to keep sensitive 
+            riders engaged even during stops, reducing the need to interrupt lessons. 
+            Besides helping riders with ASD, the reins result beneficial to 
+            give instructions to people with attentional problems or 
+            nonverbal. It also helps beginners learn how to keep the hands 
+            in the right position and receive haptic cues for instructions. And they help everyone keep their hands warm during winter. 
+        </p>
+      </div>
+      <div class="image">
+        <img src="digital-reins-2.png" alt="Digital Reins Image">
+      </div>
+    </div>
+  </section>
+
+  <section class="two-column bg-dark">
+    <div class="container">
+      <div class="text">
+        <h2>Technical details</h2>
+        <p><strong>Radio technology:</strong> Transmits signals up to 3 miles away. Direct radio transmission enables millisecond-level response times, eliminating cloud-related latency and jitter.</p>
+        <p><strong>Dual power options:</strong> Features a rechargeable lithium battery and a 9V battery receptacle for added reliability.</p>
+        <p><strong>Adjustable hand grabbers with warmers:</strong> Attach securely to the reins, are fully adjustable for comfort, and provide support for beginners as well as warmth during winter.</p>
+        <p><strong>Controls:</strong></p>
+        <ul>
+          <li><strong>Ergonomic design:</strong> Small enough to be grabbed by one hand.</li>
+          <li><strong>Left/right buttons:</strong> Send signals to the corresponding rein grabber.</li>
+          <li><strong>Diamond button:</strong> Sends signals to both reins simultaneously.</li>
+          <li><strong>Center heart button:</strong> Includes an on/off switch for heartbeat mode, a rhythm regulator, and two low-voltage red LEDs that blink as the respective grabbers receive signals.</li>
+        </ul>
+        
+      </div>
+      <div class="image">
+        <img src="section2-image.png" alt="Device with adjustable hand grabbers attached to the reins" />
+      </div>
+    </div>
+  </section>
+  <footer class="bg-dark" style="padding: 2rem; font-size: 0.9rem; color: #ccc;">
+    <div class="container">
+      <p>
+        Horseback riding and program images © GallopNYC.
+        Device and digital reins images © BIG FROOTS.
+      </p>
+    </div>
+  </footer>
+  
+  
+</body>
+</html>

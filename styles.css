@@ -1,0 +1,228 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Fullscreen hero */
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* Video background */
+  .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  /* Dark overlay */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 2;
+  }
+  
+  /* Overlay base */
+  .overlay {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: white;
+  }
+  
+  /* HERO TEXT */
+  .text-container {
+    max-width: 800px;
+    text-align: center;
+  }
+  
+  .overlay h1 {
+    font-family: 'Sekuya', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5rem;
+    text-shadow:
+      0 0 12px rgba(140, 80, 255, 0.35),
+      0 0 30px rgba(80, 60, 255, 0.25);
+  }
+  
+  /* Subtitles */
+  .subtitle {
+    letter-spacing: 0.04em;
+    font-family: 'Atkinson Hyperlegible', monospace;
+  }
+  
+  .subtitle.primary {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  
+  .subtitle.secondary {
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  
+  /* ===================== */
+  /* PUBLICATIONS SECTION */
+  /* ===================== */
+  
+  .publications-overlay {
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 4rem;
+    height: 100%;        /* full height to push list to bottom */
+  }
+  
+  .publications-wrapper {
+    max-width: 900px;
+  }
+  
+  /* Title */
+  .publications-title {
+    font-family: 'Sekuya', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-family: 'Atkinson Hyperlegible', monospace;
+  }
+  
+  /* List */
+  .publications-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: auto; 
+  }
+  
+  /* Publication item */
+  .publication-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background: transparent;
+    border: 0px solid rgba(255, 255, 255, 0.85);
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  /* Text */
+  .publication-text h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Atkinson Hyperlegible', monospace;
+    flex: 1; /* allows it to stretch */
+  }
+  
+  .publication-text p {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-family: 'Atkinson Hyperlegible', monospace;
+  }
+  
+  /* Links */
+  .publication-links a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+    opacity: 0.85;
+    font-family: 'Atkinson Hyperlegible', monospace;
+  }
+  
+  .publication-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+  
+  /* PDF cover */
+  .publication-cover {
+    width: 90px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Year */
+  .publication-year {
+    font-weight: normal;
+    opacity: 0.7;
+    margin-left: 0.4rem;
+  }
+  /* Publication item layout */
+.publication-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch; /* stretch vertically so PDF and text align */
+    background: transparent;
+    padding: 0;
+  }
+  
+  /* Text container */
+  .publication-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* pushes all children to bottom */
+    font-family: 'Atkinson Hyperlegible', monospace;
+    flex: 1; /* takes all remaining horizontal space */
+  }
+  
+  /* Text inside */
+  .publication-text h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .publication-text p {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  
+  /* Links */
+  .publication-links a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    margin-right: 1rem;
+    opacity: 0.85;
+    font-family: 'Atkinson Hyperlegible', monospace;
+  }
+  
+  .publication-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+  
+  /* PDF cover */
+  .publication-cover {
+    width: 90px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Year */
+  .publication-year {
+    font-weight: normal;
+    opacity: 0.7;
+    margin-left: 0.4rem;
+  }
+  
