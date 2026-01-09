@@ -30,7 +30,7 @@
     .hero {
       position: relative;
       width: 100vw;
-      height: 100vh;
+      height: 100svh;
       overflow: hidden;
     }
 
@@ -825,6 +825,138 @@
   display: block;
   border-radius: inherit; /* if the wrapper has rounded corners */
 }
+
+/* ================================= */
+/* MOBILE + TABLET OPTIMIZATION */
+/* ================================= */
+@media (max-width: 900px) {
+
+  /* ---------- GLOBAL ---------- */
+  body {
+    overflow-x: hidden;
+  }
+
+  section {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  /* ---------- HERO ---------- */
+  .overlay {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .text-container {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 10vw, 3.2rem);
+  }
+
+  .subtitle.primary {
+    font-size: 0.9rem;
+  }
+
+  .hero-gif {
+    max-width: 70vw;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about-text {
+    text-align: center;
+  }
+
+  .mission {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+  }
+
+  .pillars p {
+    font-size: 0.9rem;
+  }
+
+  /* ---------- VENN ---------- */
+  .venn-svg {
+    max-width: 260px;
+  }
+
+  /* ---------- RESEARCH ---------- */
+  .research h2 {
+    font-size: 1.7rem;
+  }
+
+  .research-description {
+    font-size: 0.9rem;
+  }
+
+  .research-video-wrapper {
+    border-radius: 6px;
+  }
+
+  /* ---------- ARTIFACT ---------- */
+  .artifact-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .artifact h2 {
+    font-size: 1.7rem;
+  }
+
+  .artifact-description,
+  .artifact-followup {
+    font-size: 0.9rem;
+  }
+
+  .artifact-fullwidth {
+    padding: 0;
+  }
+
+  /* ---------- QUESTION ---------- */
+  .question h2 {
+    font-size: 1.7rem;
+  }
+
+  .question-description {
+    font-size: 0.9rem;
+  }
+
+  .question-image {
+    padding: 0;
+  }
+
+  /* ---------- PROPOSAL ---------- */
+  .proposal h2 {
+    font-size: 1.7rem;
+  }
+
+  .proposal-description {
+    font-size: 0.9rem;
+  }
+
+  .proposal-canva-wrapper {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* ---------- FLOW DIAGRAM ---------- */
+  .flow-step {
+    min-width: unset;
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
 
 
   </style>
