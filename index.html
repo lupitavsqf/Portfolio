@@ -505,6 +505,125 @@
   transform: translateY(0);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
 }
+    /* ===================== */
+/* MOBILE OPTIMIZATION */
+/* ===================== */
+@media (max-width: 768px) {
+
+  /* ---------- GLOBAL ---------- */
+  body {
+    overflow-x: hidden;
+  }
+
+  .overlay {
+    padding: 1.5rem;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    height: 100svh; /* better mobile viewport handling */
+  }
+
+  .overlay h1 {
+    font-size: clamp(2.2rem, 9vw, 3rem);
+    letter-spacing: 0.03em;
+  }
+
+  .subtitle.primary {
+    font-size: 0.9rem;
+  }
+
+  .subtitle.secondary {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- ABOUT SECTION ---------- */
+  .about-content {
+    flex-direction: column;
+    height: auto;
+    gap: 2.5rem;
+  }
+
+  .about-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-description {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .profile-image {
+    width: 140px;
+    height: 140px;
+  }
+
+  .about-right {
+    width: 100%;
+  }
+
+  .resume-card {
+    height: 70vh;
+  }
+
+  .resume-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  /* ---------- PUBLICATIONS ---------- */
+  .publications-overlay {
+    padding: 2rem 1.5rem;
+  }
+
+  .publications-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .publication-item {
+    flex-direction: column-reverse;
+    gap: 1.25rem;
+  }
+
+  .publication-cover {
+    width: 120px;
+    height: calc(120px / 0.773);
+    margin-left: 0;
+  }
+
+  .publication-text h2 {
+    font-size: 0.95rem;
+  }
+
+  .publication-text p {
+    font-size: 0.85rem;
+  }
+
+  /* ---------- VISUAL DESIGN ---------- */
+  .visual-content {
+    padding: 4rem 1.5rem;
+  }
+
+  .visual-left h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .visual-right {
+    margin-top: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  /* ---------- FOOTER ---------- */
+  .site-footer {
+    font-size: 0.75rem;
+  }
+}
+
 
   </style>
 </head>
