@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>p5.js Sketch — BiGGi export</title>
+  <style>
+    body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0ede8; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <!-- BiGGi export — 3/30/2026, 9:53:25 AM -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script>
+// Code for Module 1
+let colors = [];
+function setupColors() {
+  colors = [
+    '#B3E0F7',
+    '#FFFF66',
+    '#C4F0B0',
+    '#FFDDAA',
+    '#FFFFFF'
+  ];
+}
+// End of code for Module 1
+
+// Code for Module 2
+let time = 0;
+let isAnimating = true;
+let message = "Click to stop";
+
+function drawGrid() {
+  let squareSize = 40;
+  let cols = width / squareSize;
+  let rows = height / squareSize;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      let colorIndex = (x + y + floor(time / 10)) % colors.length;
+      fill(lerpColor(color(colors[colorIndex]), color('#FFFFFF'), 0.5));
+      noStroke();
+      rect(x * squareSize, y * squareSize, squareSize, squareSize);
+    }
+  }
+  if (isAnimating) {
+    time++;
+  }
+  fill(0);
+  textSize(16);
+  text(message, 10, height - 10);
+}
+
+function mousePressed() {
+  isAnimating = !isAnimating;
+  message = isAnimating ? "Click to stop" : "Click to animate";
+}
+// End of code for Module 2
+
+// Code for Module 3
+function setup() {
+  createCanvas(600, 400);
+  setupColors();
+}
+function draw() {
+  drawGrid();
+}
+// End of code for Module 3
+  </script>
+</body>
+</html>

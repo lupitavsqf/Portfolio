@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>p5.js Sketch — BiGGi export</title>
+  <style>
+    body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f0ede8; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <!-- BiGGi export — 3/30/2026, 12:08:21 AM -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script>
+// Code for Module 1  
+function setup() {  
+  createCanvas(600, 400);  
+  lineSpacing = 80;  
+  lineLength = 50;  
+  linesX = [];  
+  linesY = [];  
+  for (let x = lineSpacing / 2; x < width; x += lineSpacing) {  
+    linesX.push(x);  
+  }  
+  for (let y = lineSpacing / 2; y < height; y += lineSpacing) {  
+    linesY.push(y);  
+  }  
+}  
+// End of code for Module 1
+
+// Code for Module 2  
+let angle = 0;  
+function draw() {  
+  background(255, 105, 180);  
+  stroke(0);  
+  strokeWeight(4);  
+  for (let i = 0; i < linesX.length; i++) {  
+    for (let j = 0; j < linesY.length; j++) {  
+      push();  
+      translate(linesX[i], linesY[j]);  
+      rotate(angle);  
+      rectMode(CENTER);  
+      let colorValue = map(angle, 0, TWO_PI, 0, 1);  
+      let r = lerp(255, 0, colorValue);  
+      let g = lerp(255, 255, colorValue);  
+      let b = lerp(0, 255, colorValue);  
+      fill(r, g, b);  
+      rect(0, 0, lineLength, lineLength / 4);  
+      pop();  
+    }  
+  }  
+}  
+function mouseWheel(event) {  
+  angle += event.delta * 0.001;  
+  angle = constrain(angle, 0, TWO_PI);  
+}  
+// End of code for Module 2
+  </script>
+</body>
+</html>
