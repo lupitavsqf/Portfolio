@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crystallization and Dissolution, Accelerated — Lupita Vásquez Fabela</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Variables ─────────────────────────────────────────────── */
+    :root {
+      --text-xs:      0.75rem;
+      --text-sm:      0.85rem;
+      --text-base:    0.95rem;
+      --text-lg:      1rem;
+      --text-xl:      1.25rem;
+      --text-2xl:     1.75rem;
+      --text-3xl:     2.5rem;
+      --text-hero:    clamp(2.2rem, 5vw, 4rem);
+
+      --color-accent:        #d100b8;
+      --color-accent-hover:  #e600cc;
+      --color-white:         #ffffff;
+      --color-border-subtle: rgba(255,255,255,0.15);
+      --color-overlay-dark:  rgba(0,0,0,0.55);
+
+      --font-display: 'Sekuya', serif;
+      --font-body:    'Atkinson Hyperlegible', monospace;
+
+      --nav-h:           56px;
+      --section-pad-x:   4rem;
+      --section-pad-y:   4rem;
+      --content-max:     860px;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { background:#000; color:var(--color-white); overflow-x:hidden; }
+
+    /* ── Skip link ─────────────────────────────────────────────── */
+    .skip-link {
+      position:absolute; top:-100%; left:1rem; z-index:200;
+      background:#fff; color:#000;
+      font-family:var(--font-body); font-size:var(--text-sm); font-weight:700;
+      padding:0.5rem 1rem; border-radius:0 0 6px 6px; text-decoration:none;
+    }
+    .skip-link:focus { top:0; }
+
+    /* ── Nav ───────────────────────────────────────────────────── */
+    .site-nav {
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      height:var(--nav-h);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 2.5rem;
+      background:rgba(0,0,0,0.55);
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--color-border-subtle);
+    }
+
+    .site-nav__logo {
+      font-family:var(--font-display); font-size:1.05rem;
+      color:var(--color-white); text-decoration:none;
+      letter-spacing:0.04em; opacity:0.9; white-space:nowrap;
+    }
+
+    .site-nav__back {
+      font-family:var(--font-body); font-size:var(--text-xs);
+      font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--color-white); text-decoration:none; opacity:0.65;
+      transition:opacity 0.2s ease;
+    }
+    .site-nav__back:hover, .site-nav__back:focus-visible { opacity:1; }
+    .site-nav__back:focus-visible {
+      outline:2px solid var(--color-white); outline-offset:3px; border-radius:2px;
+    }
+
+    /* ── Hero (video bg, full screen) ─────────────────────────── */
+    .page-hero {
+      position:relative;
+      width:100%; min-height:100svh;
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+    }
+
+    .page-hero__video {
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:cover; z-index:0;
+    }
+
+    .page-hero__overlay {
+      position:absolute; inset:0;
+      background:var(--color-overlay-dark); z-index:1;
+    }
+
+    .page-hero__text {
+      position:relative; z-index:2;
+      padding: calc(var(--nav-h) + 3rem) var(--section-pad-x) 3rem;
+      max-width:var(--content-max);
+      text-align:center;
+      display:flex; flex-direction:column; align-items:center; gap:1.25rem;
+    }
+
+    .page-hero__label {
+      font-family:var(--font-body); font-size:var(--text-xs);
+      font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+      opacity:0.6;
+    }
+
+    .page-hero__title {
+      font-family:var(--font-display);
+      font-size:var(--text-hero);
+      font-weight:400; letter-spacing:0.04em; line-height:1.15;
+      text-shadow:
+        0 0 14px rgba(140,80,255,0.4),
+        0 0 32px rgba(80,60,255,0.25);
+    }
+
+    .page-hero__intro {
+      font-family:var(--font-body); font-size:var(--text-base);
+      line-height:1.75; opacity:0.88;
+      max-width:640px;
+    }
+
+    /* ── Divider ───────────────────────────────────────────────── */
+    .divider {
+      border:none;
+      border-top:1px solid var(--color-border-subtle);
+      margin:0 var(--section-pad-x);
+    }
+
+    /* ── Salt entries ──────────────────────────────────────────── */
+    .salts-section {
+      padding: var(--section-pad-y) var(--section-pad-x);
+      display:flex; flex-direction:column; align-items:center; gap:5rem;
+    }
+
+    .salt-entry {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:2rem;
+      max-width:720px;
+      width:100%;
+      text-align:center;
+    }
+
+    .salt-entry__video-wrap {
+      width:100%;
+      aspect-ratio:4/3;
+      border-radius:10px;
+      overflow:hidden;
+      background:#111;
+      box-shadow:0 16px 40px rgba(0,0,0,0.5);
+    }
+
+    .salt-entry__video-wrap video {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+
+    .salt-entry__text {
+      display:flex; flex-direction:column; align-items:center; gap:0.85rem;
+    }
+
+    .salt-entry__number {
+      font-family:var(--font-body); font-size:var(--text-xs);
+      font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+      opacity:0.45;
+    }
+
+    .salt-entry__title {
+      font-family:var(--font-display);
+      font-size:var(--text-2xl);
+      font-weight:400; letter-spacing:0.04em; line-height:1.2;
+      text-shadow:
+        0 0 10px rgba(140,80,255,0.25),
+        0 0 22px rgba(80,60,255,0.15);
+    }
+
+    .salt-entry__formula {
+      font-family:var(--font-body); font-size:var(--text-sm);
+      opacity:0.55; letter-spacing:0.04em;
+    }
+
+    .salt-entry__desc {
+      font-family:var(--font-body); font-size:var(--text-base);
+      line-height:1.7; opacity:0.88; max-width:600px;
+    }
+
+    /* ── Proposal form ─────────────────────────────────────────── */
+    .proposal-section {
+      padding: var(--section-pad-y) var(--section-pad-x) calc(var(--section-pad-y) * 1.5);
+      border-top:1px solid var(--color-border-subtle);
+      display:flex; flex-direction:column; align-items:center;
+      text-align:center;
+    }
+
+    .proposal-inner {
+      max-width:var(--content-max);
+      width:100%;
+    }
+
+    .proposal-section h2 {
+      font-family:var(--font-display);
+      font-size:var(--text-3xl);
+      font-weight:400; letter-spacing:0.04em;
+      margin-bottom:0.6rem;
+      text-shadow:
+        0 0 12px rgba(140,80,255,0.3),
+        0 0 28px rgba(80,60,255,0.2);
+    }
+
+    .proposal-section .proposal-sub {
+      font-family:var(--font-body); font-size:var(--text-base);
+      opacity:0.7; margin-bottom:2rem; line-height:1.55;
+    }
+
+    /* Form fields — left-align inputs within centered container */
+    .form-row {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+      margin-bottom:1rem;
+      text-align:left;
+    }
+
+    .form-group {
+      display:flex; flex-direction:column; gap:0.4rem;
+    }
+
+    .form-group.full { grid-column:1/-1; }
+
+    .form-group label {
+      font-family:var(--font-body); font-size:var(--text-xs);
+      font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+      opacity:0.65;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background:rgba(255,255,255,0.06);
+      border:1px solid var(--color-border-subtle);
+      border-radius:6px;
+      padding:0.65rem 0.9rem;
+      color:var(--color-white);
+      font-family:var(--font-body); font-size:var(--text-base);
+      transition:border-color 0.2s ease, background 0.2s ease;
+      resize:vertical;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { opacity:0.35; }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline:none;
+      border-color:rgba(209,0,184,0.7);
+      background:rgba(255,255,255,0.09);
+    }
+
+    .form-group input:focus-visible,
+    .form-group textarea:focus-visible {
+      outline:2px solid var(--color-accent);
+      outline-offset:2px;
+    }
+
+    .form-submit {
+      margin-top:1.25rem;
+      text-align:center;
+    }
+
+    /* Shared button / pub-link */
+    .pub-link {
+      display:inline-block;
+      padding:0.55rem 1.2rem;
+      background:var(--color-accent);
+      color:var(--color-white);
+      font-family:var(--font-body); font-size:var(--text-base); font-weight:700;
+      text-decoration:none; border-radius:999px; border:none; cursor:pointer;
+      transition:background 0.2s ease, transform 0.15s ease;
+    }
+    .pub-link:hover { background:var(--color-accent-hover); transform:translateY(-1px); }
+    .pub-link:focus-visible { outline:3px solid var(--color-white); outline-offset:3px; }
+    .pub-link:active { transform:translateY(0); }
+
+    /* Success message (hidden by default) */
+    .form-success {
+      display:none;
+      font-family:var(--font-body); font-size:var(--text-base);
+      color:#afffcf; margin-top:1rem; line-height:1.5;
+    }
+
+    /* ── Footer ────────────────────────────────────────────────── */
+    .site-footer {
+      width:100%; text-align:center;
+      padding:1.25rem 2rem;
+      background:rgba(0,0,0,0.9);
+      border-top:1px solid var(--color-border-subtle);
+      font-family:var(--font-body); font-size:var(--text-xs);
+      opacity:0.8;
+    }
+
+    /* ── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      :root {
+        --section-pad-x: 2rem;
+        --section-pad-y: 3rem;
+      }
+
+      .form-row {
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --section-pad-x: 1.25rem;
+        --section-pad-y: 2.5rem;
+        --text-3xl: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <a class="site-nav__logo" href="index.html">Lupita Vásquez Fabela</a>
+    <a class="site-nav__back" href="index.html#visual">← Visual Art</a>
+  </nav>
+
+  <main id="main">
+
+    <!-- HERO + INTRO (single video-backed section) -->
+    <section class="page-hero" aria-label="Page header">
+      <video
+        class="page-hero__video"
+        src="video.mp4"
+        autoplay muted loop playsinline
+        aria-hidden="true"
+      ></video>
+      <div class="page-hero__overlay" aria-hidden="true"></div>
+      <div class="page-hero__text">
+        <p class="page-hero__label">Visual Art · Polarized Light Microscopy</p>
+        <h1 class="page-hero__title">Crystallization and<br>Dissolution, Accelerated</h1>
+        <p class="page-hero__intro">
+          This series explores the interplay of light, color, and matter at the microscopic scale.
+          Using polarized light microscopy, I recorded four common salts over 10+ hours of
+          crystallization and dissolution. By accelerating the footage, the hidden behaviors of
+          these substances — their growth, melting, and reformation — are revealed, along with
+          the vibrant interference colors that emerge as polarized light passes through their
+          crystalline structures. What unfolds is a dynamic choreography of light and matter,
+          where scientific observation meets visual poetry.
+        </p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- SALT ENTRIES -->
+    <section class="salts-section" aria-label="Individual salt recordings">
+
+      <!-- SALT 1 -->
+      <div class="salt-entry">
+        <div class="salt-entry__video-wrap">
+          <video src="video.mp4" autoplay muted loop playsinline
+            aria-label="Sodium chloride crystallization footage"></video>
+        </div>
+        <div class="salt-entry__text">
+          <span class="salt-entry__number">01</span>
+          <h2 class="salt-entry__title">Sodium Chloride</h2>
+          <p class="salt-entry__formula">NaCl — table salt</p>
+          <p class="salt-entry__desc">
+            The most familiar salt on Earth, yet deeply strange under polarized light.
+            NaCl crystallizes in the cubic system, which renders it optically isotropic —
+            it does not rotate polarized light and appears nearly black between crossed
+            polarizers. What becomes visible instead are the boundaries, inclusions, and
+            the kinetics of growth: edges racing outward in perfect right angles, the
+            geometry of the face-centered cubic lattice made briefly legible.
+          </p>
+        </div>
+      </div>
+
+      <!-- SALT 2 -->
+      <div class="salt-entry">
+        <div class="salt-entry__video-wrap">
+          <video src="video-2.mp4" autoplay muted loop playsinline
+            aria-label="Magnesium sulfate crystallization footage"></video>
+        </div>
+        <div class="salt-entry__text">
+          <span class="salt-entry__number">02</span>
+          <h2 class="salt-entry__title">Magnesium Sulfate Heptahydrate</h2>
+          <p class="salt-entry__formula">MgSO₄·7H₂O — Epsom salt</p>
+          <p class="salt-entry__desc">
+            Epsom salt crystallizes in the orthorhombic system, producing long
+            needle-like or prismatic crystals that burst outward from nucleation points
+            like frozen fireworks. Under polarized light, these crystals display
+            vivid first- and second-order interference colors — yellows, magentas, and
+            blues shifting as thickness varies across each arm. The dissolution sequence
+            is equally dramatic: the needles thin from the outside in, bleeding color
+            as they retreat.
+          </p>
+        </div>
+      </div>
+
+      <!-- SALT 3 -->
+      <div class="salt-entry">
+        <div class="salt-entry__video-wrap">
+          <video src="video-3.mp4" autoplay muted loop playsinline
+            aria-label="Sodium bicarbonate crystallization footage"></video>
+        </div>
+        <div class="salt-entry__text">
+          <span class="salt-entry__number">03</span>
+          <h2 class="salt-entry__title">Sodium Bicarbonate</h2>
+          <p class="salt-entry__formula">NaHCO₃ — baking soda</p>
+          <p class="salt-entry__desc">
+            Sodium bicarbonate belongs to the monoclinic crystal system and exhibits
+            strong birefringence — a pronounced difference between its refractive indices
+            along different optical axes. The result is a rich palette of interference
+            colors across each crystal face. As the solution dries, flat rhombic plates
+            stack and overlap, creating a tiled mosaic of shifting hues that reconfigures
+            continuously with subtle changes in concentration and temperature.
+          </p>
+        </div>
+      </div>
+
+      <!-- SALT 4 -->
+      <div class="salt-entry">
+        <div class="salt-entry__video-wrap">
+          <video src="video-4.mp4" autoplay muted loop playsinline
+            aria-label="Monoammonium phosphate crystallization footage"></video>
+        </div>
+        <div class="salt-entry__text">
+          <span class="salt-entry__number">04</span>
+          <h2 class="salt-entry__title">Monoammonium Phosphate</h2>
+          <p class="salt-entry__formula">NH₄H₂PO₄ — MAP</p>
+          <p class="salt-entry__desc">
+            Monoammonium phosphate crystallizes in the tetragonal system, forming
+            elongated bipyramidal or prismatic crystals with a distinctively ordered
+            symmetry. Under polarized light, MAP produces high-order interference colors
+            and pronounced extinction positions as crystals rotate relative to the
+            polarizer. Its crystallization front advances with unusual regularity —
+            almost architectural — while dissolution proceeds in reverse with the same
+            quiet precision.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PROPOSAL FORM -->
+    <section class="proposal-section" aria-labelledby="proposal-heading">
+      <div class="proposal-inner">
+
+        <h2 id="proposal-heading">Propose a Salt</h2>
+        <p class="proposal-sub">
+          Curious what another substance looks like under polarized light?
+          Send a proposal — name the salt, tell me why it interests you, and I'll
+          consider it for a future recording session.
+        </p>
+
+        <!--
+          ┌──────────────────────────────────────────────────────────┐
+          │  FORMSPREE SETUP                                         │
+          │  1. Create a free account at https://formspree.io        │
+          │  2. Create a new form and copy your endpoint ID          │
+          │  3. Replace YOUR_FORM_ID below with that ID              │
+          │     e.g. action="https://formspree.io/f/abcde123"        │
+          └──────────────────────────────────────────────────────────┘
+        -->
+        <form
+          id="proposal-form"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input
+                type="text" id="name" name="name"
+                placeholder="Ada Lovelace"
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email <span aria-label="required">*</span></label>
+              <input
+                type="email" id="email" name="email"
+                placeholder="ada@example.com"
+                required autocomplete="email"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full">
+              <label for="salt-name">Salt / compound name <span aria-label="required">*</span></label>
+              <input
+                type="text" id="salt-name" name="salt_name"
+                placeholder="e.g. Potassium permanganate (KMnO₄)"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full">
+              <label for="reason">Why does this salt interest you?</label>
+              <textarea
+                id="reason" name="reason"
+                rows="5"
+                placeholder="Tell me about the color, the structure, a memory, a hypothesis…"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true" />
+
+          <div class="form-submit">
+            <button type="submit" class="pub-link">Send proposal</button>
+          </div>
+        </form>
+
+        <p class="form-success" id="form-success" role="alert">
+          Thank you — your proposal has been received. I'll be in touch if your salt
+          makes it onto the stage.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Lupita Vásquez Fabela. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Video resilience
+    document.querySelectorAll("video").forEach(video => {
+      video.addEventListener("ended", () => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      });
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && video.paused) video.play().catch(() => {});
+      });
+    });
+
+    // Formspree AJAX submission — shows inline success, no page redirect
+    const form    = document.getElementById("proposal-form");
+    const success = document.getElementById("form-success");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { Accept: "application/json" }
+        });
+        if (res.ok) {
+          form.style.display = "none";
+          success.style.display = "block";
+        } else {
+          alert("Something went wrong. Please try again or email me directly.");
+        }
+      } catch {
+        alert("Network error. Please check your connection and try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
