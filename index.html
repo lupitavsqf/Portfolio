@@ -16,6 +16,10 @@
     href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap"
     rel="stylesheet"
   />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     /* ===================== */
@@ -43,6 +47,17 @@
       --color-white-muted:  rgba(255, 255, 255, 0.7);
       --color-border-subtle: rgba(255, 255, 255, 0.15);
 
+      /* Big Froots palette */
+      --bf-coral:    #F4613C;
+      --bf-coral-dk: #C94220;
+      --bf-teal:     #72b7a3;
+      --bf-teal-lt:  #D6F6F3;
+      --bf-indigo:   #0b5a42;
+      --bf-indigo-lt:#EEF0FF;
+      --bf-amber:    #FFC842;
+      --bf-ink:      #313131;
+      --bf-muted:    #6B7280;
+
       /* Spacing */
       --section-pad-x: 4rem;
       --section-pad-y: 4rem;
@@ -53,6 +68,8 @@
       /* Fonts */
       --font-display: 'Sekuya', serif;
       --font-body:    'Atkinson Hyperlegible', monospace;
+      --font-fredoka: 'Fredoka', sans-serif;
+      --font-nunito:  'Nunito', sans-serif;
     }
 
     /* ===================== */
@@ -228,9 +245,15 @@
       font-family: var(--font-body);
       font-size: var(--text-sm);
       font-weight: 400;
-      line-height: 1.6;
+      line-height: 1.8;
       letter-spacing: 0.02em;
       opacity: 0.85;
+    }
+
+    .hero-subtitle-secondary strong {
+      font-weight: 700;
+      opacity: 1;
+      color: var(--color-white);
     }
 
     /* ===================== */
@@ -275,10 +298,14 @@
     .about-description {
       font-family: var(--font-body);
       font-size: var(--text-base);
-      line-height: 1.65;
+      line-height: 1.75;
       letter-spacing: 0.02em;
       opacity: 0.92;
       margin-bottom: 1.5rem;
+    }
+
+    .about-description em {
+      font-style: italic;
     }
 
     /* CTA row */
@@ -386,10 +413,6 @@
       background: rgba(0, 0, 0, 0.14);
     }
 
-    .resume-header .btn--linkedin {
-      /* keep the same linkedin blue */
-    }
-
     .resume-card iframe {
       flex: 1;
       width: 100%;
@@ -397,15 +420,8 @@
     }
 
     /* ===================== */
-    /* PUBLICATIONS /        */
-    /* ACCESSIBILITY SECTION */
+    /* SECTION HEADING       */
     /* ===================== */
-    #accessibility .section-content,
-    #publications .section-content {
-      justify-content: center;
-      padding-top: calc(var(--nav-h) + var(--section-pad-y));
-    }
-
     .section-heading {
       font-family: var(--font-display);
       font-size: var(--text-3xl);
@@ -415,6 +431,195 @@
       text-shadow:
         0 0 12px rgba(140, 80, 255, 0.35),
         0 0 30px rgba(80, 60, 255, 0.25);
+    }
+
+    /* ===================== */
+    /* DESIGN FOR ACCESS.    */
+    /* ===================== */
+    #accessibility .section-content {
+      justify-content: flex-start;
+      padding-top: calc(var(--nav-h) + var(--section-pad-y));
+    }
+
+    /* ── Big Froots intro block ── */
+    .bf-intro {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      max-width: 860px;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    .bf-logo-link {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .bf-wordmark {
+      font-family: var(--font-fredoka);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1;
+      opacity: 0.95;
+      white-space: nowrap;
+    }
+
+    .bf-wordmark span {
+      color: var(--bf-coral);
+    }
+
+    .bf-intro-text {
+      font-family: var(--font-nunito);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      opacity: 0.88;
+      color: var(--color-white);
+    }
+
+    .bf-intro-text strong {
+      font-weight: 700;
+      opacity: 1;
+      color: var(--color-white);
+    }
+
+    .bf-intro-text em {
+      font-style: italic;
+      color: var(--bf-teal);
+      font-weight: 600;
+      opacity: 1;
+    }
+
+    /* ── Product cards grid ── */
+    .bf-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 860px;
+    }
+
+    .bf-pcard {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .bf-pcard:hover {
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+
+    .bf-pcard__img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bf-pcard__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bf-pcard__iframe-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #111;
+      position: relative;
+    }
+
+    .bf-pcard__iframe-wrap iframe {
+      width: 200%;
+      height: 200%;
+      border: none;
+      display: block;
+      transform: scale(0.5);
+      transform-origin: top left;
+      pointer-events: none;
+    }
+
+    .bf-pcard__body {
+      padding: 1.35rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+
+    .bf-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-family: var(--font-nunito);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .bf-tag--teal   { background: rgba(114,183,163,0.18); color: #72b7a3; border: 1px solid rgba(114,183,163,0.3); }
+    .bf-tag--indigo { background: rgba(238,240,255,0.1);  color: #a0aaff; border: 1px solid rgba(160,170,255,0.2); }
+
+    .bf-pcard__title {
+      font-family: var(--font-fredoka);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-white);
+      line-height: 1.3;
+    }
+
+    .bf-pcard__desc {
+      font-family: var(--font-nunito);
+      font-size: 0.87rem;
+      line-height: 1.65;
+      opacity: 0.8;
+      color: var(--color-white);
+      flex: 1;
+    }
+
+    .bf-pcard__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--bf-coral);
+      font-family: var(--font-nunito);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      margin-top: 0.25rem;
+      transition: gap 0.2s ease;
+    }
+
+    .bf-pcard__link:hover {
+      gap: 10px;
+      color: #ff8b6b;
+    }
+
+    /* ===================== */
+    /* PUBLICATIONS          */
+    /* ===================== */
+    #publications .section-content {
+      justify-content: center;
+      padding-top: calc(var(--nav-h) + var(--section-pad-y));
     }
 
     .publications-list {
@@ -442,23 +647,37 @@
       font-family: var(--font-body);
       font-size: var(--text-lg);
       font-weight: 700;
-      line-height: 1.45;
+      line-height: 1.5;
+    }
+
+    .publication-text h2 em {
+      font-style: italic;
+      font-weight: 400;
     }
 
     .publication-year {
       font-weight: 400;
-      opacity: 0.65;
+      opacity: 0.55;
       margin-left: 0.35rem;
+      font-size: var(--text-sm);
     }
 
     .publication-text p {
       font-family: var(--font-body);
       font-size: var(--text-base);
-      line-height: 1.65;
-      opacity: 0.9;
+      line-height: 1.75;
+      opacity: 0.88;
     }
 
-    /* Publication CTA — single definition, no duplication */
+    .publication-text p em {
+      font-style: italic;
+    }
+
+    .publication-text p strong {
+      font-weight: 700;
+    }
+
+    /* Publication CTA */
     .publication-links {
       display: flex;
       flex-wrap: wrap;
@@ -502,7 +721,6 @@
       border-radius: 6px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
       flex-shrink: 0;
-      /* Align to top of text column */
       align-self: start;
     }
 
@@ -534,11 +752,12 @@
       border: 1px solid var(--color-border-subtle);
       border-radius: 12px;
       overflow: hidden;
-      transition: border-color 0.25s ease;
+      transition: border-color 0.25s ease, transform 0.2s ease;
     }
 
     .va-card:hover {
       border-color: rgba(255,255,255,0.3);
+      transform: translateY(-3px);
     }
 
     .va-card__video-wrap {
@@ -553,6 +772,25 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    /* iframe preview for BiGGi card */
+    .va-card__iframe-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #111;
+      position: relative;
+    }
+
+    .va-card__iframe-wrap iframe {
+      width: 200%;
+      height: 200%;
+      border: none;
+      display: block;
+      transform: scale(0.5);
+      transform-origin: top left;
+      pointer-events: none;
     }
 
     .va-card__body {
@@ -574,12 +812,20 @@
         0 0 24px rgba(80, 60, 255, 0.15);
     }
 
+    .va-card__title em {
+      font-style: italic;
+    }
+
     .va-card__desc {
       font-family: var(--font-body);
       font-size: var(--text-base);
-      line-height: 1.65;
+      line-height: 1.7;
       opacity: 0.85;
       flex: 1;
+    }
+
+    .va-card__desc em {
+      font-style: italic;
     }
 
     @media (max-width: 700px) {
@@ -634,7 +880,6 @@
         --section-pad-y: 3rem;
       }
 
-      /* Nav: collapse links */
       .site-nav__links {
         display: none;
         position: absolute;
@@ -664,7 +909,6 @@
         display: block;
       }
 
-      /* About: stack */
       #about .section-content {
         flex-direction: column;
         align-items: center;
@@ -690,7 +934,14 @@
         max-height: 560px;
       }
 
-      /* Visual art: stack handled in .visual-art-grid media query */
+      .bf-intro {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .bf-cards-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 640px) {
@@ -701,7 +952,6 @@
         --text-hero: clamp(2.2rem, 9vw, 3rem);
       }
 
-      /* Publications: single column */
       .publication-item {
         grid-template-columns: 1fr;
       }
@@ -715,6 +965,10 @@
         flex-direction: row;
         flex-wrap: wrap;
         gap: 0.5rem;
+      }
+
+      .visual-art-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -776,12 +1030,12 @@
         </p>
 
         <p class="hero-subtitle-secondary">
-          Exploring applied philosophical pragmatism in tech.<br />
-          Currently doing orchestration layers of "working memory"<br />
+          Exploring <strong>applied philosophical pragmatism</strong> in tech.<br />
+          Currently working on orchestration layers of <em style="font-style:italic;">"working memory"</em><br />
           for LLM-powered web applications.<br />
           <br />
-          MFA Design & Technology — Parsons School of Design<br />
-          BSc Chemistry — UNAM (Universidad Nacional Autónoma de México, Facultad de Química)
+          <strong>MFA</strong> Design &amp; Technology — Parsons School of Design<br />
+          <strong>BSc</strong> Chemistry — UNAM (Universidad Nacional Autónoma de México, Facultad de Química)
         </p>
       </div>
     </div>
@@ -813,9 +1067,9 @@
 
         <p class="about-description">
           Chemist and creative technologist working at the intersection of
-          design, computation, and philosophy. Interested in applied
-          pragmatism, orchestration layers, and human-centered systems for
-          LLM-powered applications.
+          <em>design</em>, <em>computation</em>, and <em>philosophy</em>.
+          Interested in applied pragmatism, orchestration layers, and
+          human-centered systems for LLM-powered applications.
         </p>
 
         <div class="about-ctas">
@@ -829,7 +1083,7 @@
             Download CV
           </a>
           <a
-            href="https://www.linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/lupitavasquezfabela"
             target="_blank"
             rel="noopener"
             class="btn btn--linkedin"
@@ -873,71 +1127,82 @@
     <div class="section-content">
       <h1 class="section-heading">Design for Accessibility</h1>
 
-      <ul class="publications-list" role="list">
+      <!-- BIG FROOTS INTRO -->
+      <div class="bf-intro">
+        <a href="https://bigfroots.org" target="_blank" rel="noopener" class="bf-logo-link" aria-label="BIG FROOTS website">
+          <span class="bf-wordmark">BIG <span>FROOTS</span></span>
+        </a>
+        <p class="bf-intro-text">
+          <strong>BIG FROOTS</strong> is a nonprofit building <em>conscious digital tech</em> that breaks
+          barriers, fosters creativity, and supports wellbeing — for children and adults of
+          <strong>all abilities</strong>. These two projects explore how accessibility-first design,
+          haptic feedback, and responsible AI can reduce cognitive load and open new pathways
+          for learning and therapy.
+        </p>
+      </div>
 
-        <!-- ITEM 1 -->
-        <li class="publication-item">
-          <div class="publication-text">
-            <h2>
-              An AI agent with a lightweight interface and backend layer to
-              optimize LLM short-term memory during document creation, reducing
-              token usage and computational cost while optimizing content quality
-              and increasing user cognitive engagement.
-              <span class="publication-year">(2025)</span>
-            </h2>
-            <p>
-              Can accessible design be the key to greener, more responsible
-              generative AI? The use of Large Language Models (LLMs) in
-              productivity has surged in recent years, and they are mostly found
-              in the form of chat-based interfaces. But what happens when we
-              design for cognitive accessibility beyond chatbots? What happens
-              when we go beyond WCAG guidelines, ensuring usability and building
-              strategic "working memories" and data visualizations to catalyze
-              task completion? Computational efficiency and energy savings seem
-              one collateral benefit we might find along the way.
-            </p>
-            <div class="publication-links">
-              <a href="eleva.html" class="pub-link" aria-label="See more about Eleva project">
-                See more…
-              </a>
-            </div>
+      <!-- PRODUCT CARDS -->
+      <div class="bf-cards-grid">
+
+        <!-- ReinGuide -->
+        <article class="bf-pcard">
+          <div class="bf-pcard__img-wrap">
+            <img src="covers/digital-reins.png" alt="ReinGuide — digital reins for horse-riding therapy" />
           </div>
-
-          <img
-            src="logo-white-nano.gif"
-            alt="Eleva project cover"
-            class="publication-cover"
-          />
-        </li>
-
-        <!-- ITEM 2 -->
-        <li class="publication-item">
-          <div class="publication-text">
-            <h2>
-              Can haptic devices, or devices that make use of tactile cues, help
-              us improve horse-riding therapy lessons for nonverbal kids on the
-              spectrum?
-              <span class="publication-year">(2024)</span>
-            </h2>
-            <p>
-              A set of digital reins with hand warmers seems to help nonverbal
-              kids with autism during their therapy horse riding lessons.
+          <div class="bf-pcard__body">
+            <span class="bf-tag bf-tag--teal">Therapy Tech · 2024</span>
+            <h2 class="bf-pcard__title">ReinGuide</h2>
+            <p class="bf-pcard__desc">
+              Smart digital reins with <strong>gentle haptic feedback</strong> — designed to
+              enhance inclusive horse-riding therapy for nonverbal children on the spectrum.
+              Tactile cues replace verbal instruction, creating a calmer, more supportive
+              therapeutic environment.
             </p>
-            <div class="publication-links">
-              <a href="reins.html" class="pub-link" aria-label="See more about Digital Reins project">
-                See more…
-              </a>
-            </div>
+            <a
+              href="https://lupitavsqf.github.io/BIG-FROOTS/producto1.html"
+              target="_blank"
+              rel="noopener"
+              class="bf-pcard__link"
+              aria-label="Learn more about ReinGuide"
+            >
+              Learn more
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
           </div>
+        </article>
 
-          <img
-            src="covers/digital-reins.png"
-            alt="Digital Reins project cover"
-            class="publication-cover"
-          />
-        </li>
+        <!-- BiGGi -->
+        <article class="bf-pcard">
+          <div class="bf-pcard__iframe-wrap">
+            <iframe src="visual1.html" title="BiGGi — animated preview" scrolling="no" aria-hidden="true"></iframe>
+          </div>
+          <div class="bf-pcard__body">
+            <span class="bf-tag bf-tag--indigo">AI Learning · 2025</span>
+            <h2 class="bf-pcard__title">BiGGi — AI Coding Agent</h2>
+            <p class="bf-pcard__desc">
+              An AI agent with a <strong>lightweight interface</strong> that helps users learn to code
+              in structured, manageable chunks — reducing cognitive overload while building
+              genuine comprehension. Designed for <em>cognitive accessibility</em> beyond
+              conventional chatbots.
+            </p>
+            <a
+              href="https://lupitavsqf.github.io/BIG-FROOTS/producto2.html"
+              target="_blank"
+              rel="noopener"
+              class="bf-pcard__link"
+              aria-label="Learn more about BiGGi"
+            >
+              Learn more
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </article>
 
-      </ul>
+      </div>
     </div>
   </section>
 
@@ -963,11 +1228,10 @@
           <div class="va-card__body">
             <h2 class="va-card__title">Crystallization and Dissolution, Accelerated</h2>
             <p class="va-card__desc">
-              Using polarized light microscopy, I recorded sodium chloride,
-              magnesium sulfate, sodium bicarbonate, and monoammonium phosphate
-              over 10+ hours of crystallization and dissolution. Accelerated, the
-              hidden choreography of light and matter is revealed — where
-              scientific observation meets visual poetry.
+              Using polarized light microscopy, sodium chloride, magnesium sulfate, sodium
+              bicarbonate, and monoammonium phosphate were recorded over 10+ hours of
+              crystallization and dissolution. Accelerated, the hidden choreography of
+              light and matter is revealed — where <em>scientific observation meets visual poetry</em>.
             </p>
             <a href="crystallization.html" class="pub-link">See more…</a>
           </div>
@@ -976,7 +1240,6 @@
         <!-- PROJECT 2: GOYA -->
         <article class="va-card">
           <div class="va-card__video-wrap">
-            <!-- Replace goya-sueno.mp4 with your actual filename -->
             <video
               src="goya-sueno.mp4"
               autoplay muted loop playsinline
@@ -986,11 +1249,33 @@
           <div class="va-card__body">
             <h2 class="va-card__title">Goya's <em>Los Caprichos</em>, Animated</h2>
             <p class="va-card__desc">
-              An animation of Francisco Goya's <em>El sueño de la razón produce
-              monstruos</em> — Plate 43 from <em>Los Caprichos</em> (1799).
+              An animation of Francisco Goya's <em>El sueño de la razón produce monstruos</em>
+              — Plate&nbsp;43 from <em>Los Caprichos</em> (1799).
               The sleeping figure, the owls, the bats: brought into uneasy motion.
             </p>
             <a href="goya.html" class="pub-link">See more…</a>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: BiGGi -->
+        <article class="va-card">
+          <div class="va-card__iframe-wrap">
+            <iframe src="visual1.html" title="BiGGi generative animation preview" scrolling="no" aria-hidden="true"></iframe>
+          </div>
+          <div class="va-card__body">
+            <h2 class="va-card__title">BiGGi — Generative Visuals</h2>
+            <p class="va-card__desc">
+              Generative animations produced by <strong>BiGGi</strong>, an AI coding agent for p5.js.
+              Each piece is generated through structured, human-guided AI prompts —
+              exploring the boundary between <em>algorithmic authorship</em> and intentional design.
+            </p>
+            <a
+              href="https://lupitavsqf.github.io/BIG-FROOTS/producto2.html"
+              target="_blank"
+              rel="noopener"
+              class="pub-link"
+              aria-label="See more about BiGGi"
+            >See more…</a>
           </div>
         </article>
 
@@ -1020,14 +1305,13 @@
             <h2>
               Philosophical Pragmatism and Design as a Workaround to Common
               Fallacies in Executive Function Enhancement through Artificial
-              Intelligence: A Reflection on Neuralink and ChatGPT
+              Intelligence: A Reflection on <em>Neuralink</em> and <em>ChatGPT</em>
               <span class="publication-year">(2025)</span>
             </h2>
             <p>
-              The cycles of expectation-disappointment in AI can be seen as an
-              invitation to reflect on the philosophical foundations of our
-              approaches, especially when it comes to the development of
-              technologies that are invasive to the human body.
+              The cycles of expectation and disappointment in AI can be seen as an
+              invitation to reflect on the <strong>philosophical foundations</strong> of our approaches —
+              especially when it comes to technologies that are invasive to the human body.
             </p>
             <div class="publication-links">
               <a
@@ -1057,19 +1341,16 @@
             </h2>
             <p>
               A pragmatist standpoint can be adopted legitimately in chemistry,
-              whose knowledge is validated by the scientific method; observation
-              perfectly matches the pragmatist concept of "sensible effects." I
-              go beyond the paradigm that conceives chemistry as totally
-              reducible to physics to approach problems of 21st century
-              philosophy of chemistry. Regarding time, I found that time
-              intervals in which emergent chemical phenomena occur must
-              necessarily be continuums — and the length of these intervals must
-              be longer than a minimum determined by a perceptive apparatus. As a
-              consequence, the properties that define chemical reactivity and
-              identity are time-dependent. Since the facts we have access to are
-              exhibited locally in our time dimension, I conclude that the
-              chemical reality described in science must also be temporarily
-              local.
+              whose knowledge is validated by the scientific method — observation
+              perfectly matches the pragmatist concept of <em>"sensible effects."</em>
+              Going beyond the paradigm that conceives chemistry as totally reducible
+              to physics, this thesis approaches problems of 21st-century philosophy
+              of chemistry. Regarding time, I found that the intervals in which
+              <strong>emergent chemical phenomena</strong> occur must necessarily be continuums,
+              and that the properties defining chemical reactivity and identity are
+              <em>time-dependent</em>. Since the facts we have access to are exhibited
+              locally in our time dimension, chemical reality as described by science
+              must also be <strong>temporarily local</strong>.
             </p>
             <div class="publication-links">
               <a
