@@ -438,7 +438,15 @@
     /* ===================== */
     #accessibility .section-content {
       justify-content: flex-start;
+      align-items: center;
+      text-align: left;
       padding-top: calc(var(--nav-h) + var(--section-pad-y));
+    }
+
+    #accessibility .section-heading {
+      width: 100%;
+      max-width: 860px;
+      text-align: left;
     }
 
     /* ── Big Froots intro block ── */
@@ -446,8 +454,11 @@
       display: flex;
       align-items: flex-start;
       gap: 1.5rem;
+      width: 100%;
       max-width: 860px;
       margin-bottom: 2.5rem;
+      margin-left: auto;
+      margin-right: auto;
       padding-bottom: 2rem;
       border-bottom: 1px solid var(--color-border-subtle);
     }
@@ -458,6 +469,13 @@
       align-items: center;
       gap: 0.6rem;
       text-decoration: none;
+    }
+
+    .bf-logo-img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      flex-shrink: 0;
     }
 
     .bf-wordmark {
@@ -503,6 +521,9 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
       max-width: 860px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .bf-pcard {
@@ -1130,6 +1151,7 @@
       <!-- BIG FROOTS INTRO -->
       <div class="bf-intro">
         <a href="https://bigfroots.org" target="_blank" rel="noopener" class="bf-logo-link" aria-label="BIG FROOTS website">
+          <img src="logo-frutas.png" alt="" class="bf-logo-img" aria-hidden="true" />
           <span class="bf-wordmark">BIG <span>FROOTS</span></span>
         </a>
         <p class="bf-intro-text">
@@ -1147,7 +1169,7 @@
         <!-- ReinGuide -->
         <article class="bf-pcard">
           <div class="bf-pcard__img-wrap">
-            <img src="smart-reins-1.png" alt="ReinGuide — digital reins for horse-riding therapy" />
+            <img src="covers/digital-reins.png" alt="ReinGuide — digital reins for horse-riding therapy" />
           </div>
           <div class="bf-pcard__body">
             <span class="bf-tag bf-tag--teal">Therapy Tech · 2024</span>
