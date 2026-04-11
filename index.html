@@ -818,6 +818,168 @@
     }
 
     /* ===================== */
+    /* ELEVA                 */
+    /* ===================== */
+    #eleva .section-content {
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: calc(var(--nav-h) + var(--section-pad-y));
+      gap: 3rem;
+    }
+
+    .eleva-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      align-items: start;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .eleva-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .eleva-tag {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 99px;
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      width: fit-content;
+    }
+
+    .eleva-description {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.8;
+      opacity: 0.88;
+    }
+
+    .eleva-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-top: 0.5rem;
+    }
+
+    .eleva-pillar {
+      border-left: 2px solid rgba(255,255,255,0.2);
+      padding-left: 1rem;
+    }
+
+    .eleva-pillar strong {
+      display: block;
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+      opacity: 0.7;
+    }
+
+    .eleva-pillar p {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      line-height: 1.7;
+      opacity: 0.82;
+    }
+
+    .eleva-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* Venn diagram — reused from Eleva page */
+    .eleva-venn {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .eleva-venn-circle {
+      fill: transparent;
+      stroke: white;
+      stroke-width: 2;
+      stroke-dasharray: 565;
+      stroke-dashoffset: 565;
+      opacity: 0.75;
+      animation: elevaDraw 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .eleva-venn-circle:nth-child(1) { animation-delay: 0.2s; }
+    .eleva-venn-circle:nth-child(2) { animation-delay: 0.5s; }
+    .eleva-venn-circle:nth-child(3) { animation-delay: 0.8s; }
+
+    @keyframes elevaDraw { to { stroke-dashoffset: 0; } }
+
+    .eleva-venn-center {
+      fill: white;
+      opacity: 0;
+      animation: elevaFade 0.6s ease 1.5s forwards;
+    }
+
+    @keyframes elevaFade { to { opacity: 1; } }
+
+    .eleva-venn-labels text {
+      font-family: var(--font-body);
+      font-size: 12px;
+      fill: rgba(255,255,255,0.65);
+      text-anchor: middle;
+    }
+
+    .eleva-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .eleva-flow-step {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      line-height: 1.5;
+    }
+
+    .eleva-flow-step:last-child { border-bottom: none; }
+
+    .eleva-flow-num {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      opacity: 0.35;
+      min-width: 1.5rem;
+      text-align: right;
+    }
+
+    .eleva-cta-row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .eleva-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .eleva-venn  { max-width: 260px; }
+    }
+
+    /* ===================== */
     /* FOOTER                */
     /* ===================== */
     .site-footer {
@@ -940,6 +1102,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#accessibility">Accessibility</a></li>
       <li><a href="#visual">Visual Art</a></li>
+      <li><a href="#eleva">Eleva</a></li>
       <li><a href="#publications">Publications</a></li>
     </ul>
   </nav>
@@ -1251,6 +1414,108 @@
           </div>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== -->
+  <!-- ELEVA                 -->
+  <!-- ===================== -->
+  <section class="video-section" id="eleva">
+    <video
+      class="section-video"
+      src="video-4.mp4"
+      autoplay muted loop playsinline preload="auto"
+      aria-hidden="true"
+    ></video>
+    <div class="section-overlay" aria-hidden="true"></div>
+
+    <div class="section-content">
+      <h1 class="section-heading">Eleva</h1>
+
+      <div class="eleva-inner">
+
+        <!-- LEFT: TEXT -->
+        <div class="eleva-left">
+          <span class="eleva-tag">Mission-driven consultancy</span>
+
+          <p class="eleva-description">
+            <strong>Eleva</strong> is a service design consultancy specializing in
+            infrastructure for academic and professional work assisted by LLMs —
+            with a focus on <em>cognitive accessibility</em> and social impact.
+            It explores orchestration layers of "working memory" that sit between
+            human interfaces and language models, reducing computational waste
+            while opening AI-assisted work to neurodivergent users.
+          </p>
+
+          <p class="eleva-description">
+            Standard chat-based interfaces scale quadratically with context length:
+            as conversations grow, so do token counts, energy costs, and cognitive
+            load. Eleva proposes a middleware layer that externalizes, structures,
+            and minimizes context — making AI systems more efficient, more inclusive,
+            and more legible to the people who use them.
+          </p>
+
+          <div class="eleva-pillars">
+            <div class="eleva-pillar">
+              <strong>Social impact</strong>
+              <p>Interfaces that respect attention, memory, and neurodiversity — reducing energy demands through computational efficiency.</p>
+            </div>
+            <div class="eleva-pillar">
+              <strong>Technological innovation</strong>
+              <p>Grounded philosophy translated into usable systems: "working memory" layers for LLM agents, designed through interdisciplinary systems thinking.</p>
+            </div>
+            <div class="eleva-pillar">
+              <strong>Business value</strong>
+              <p>Helping clients optimize costs and seize incentives around the development of technologies that provide cognitive accessibility.</p>
+            </div>
+          </div>
+
+          <div class="eleva-cta-row">
+            <a href="eleva.html" class="btn btn--ghost">Read the full project →</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: DIAGRAM + FLOW -->
+        <div class="eleva-right">
+
+          <!-- Animated Venn -->
+          <svg class="eleva-venn" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="160" cy="160" r="90" class="eleva-venn-circle" />
+            <circle cx="240" cy="160" r="90" class="eleva-venn-circle" />
+            <circle cx="200" cy="110" r="90" class="eleva-venn-circle" />
+            <path class="eleva-venn-center" d="M200 150 C185 140 180 165 200 175 C220 165 215 140 200 150 Z" />
+            <g class="eleva-venn-labels">
+              <text x="118" y="194">Social</text>
+              <text x="118" y="208">Impact</text>
+              <text x="282" y="194">Tech</text>
+              <text x="282" y="208">Innovation</text>
+              <text x="200" y="80">Business</text>
+              <text x="200" y="94">Value</text>
+            </g>
+          </svg>
+
+          <!-- User flow -->
+          <div class="eleva-flow" role="list" aria-label="Eleva user flow">
+            <div class="eleva-flow-step" role="listitem">
+              <span class="eleva-flow-num">01</span>
+              <span>Prompt a description of the app or task</span>
+            </div>
+            <div class="eleva-flow-step" role="listitem">
+              <span class="eleva-flow-num">02</span>
+              <span>Receive a minimum viable set of modules</span>
+            </div>
+            <div class="eleva-flow-step" role="listitem">
+              <span class="eleva-flow-num">03</span>
+              <span>Add or remove modules as needed</span>
+            </div>
+            <div class="eleva-flow-step" role="listitem">
+              <span class="eleva-flow-num">04</span>
+              <span>Modify, debug, and inspect memory traces</span>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
