@@ -26,7 +26,6 @@
     /* CSS VARIABLES          */
     /* ===================== */
     :root {
-      /* Type scale */
       --text-xs:   0.75rem;
       --text-sm:   0.85rem;
       --text-base: 0.95rem;
@@ -36,7 +35,6 @@
       --text-3xl:  2.5rem;
       --text-hero: clamp(3rem, 6vw, 5.5rem);
 
-      /* Colors */
       --color-accent:       #d100b8;
       --color-accent-hover: #e600cc;
       --color-linkedin:     #0A66C2;
@@ -47,7 +45,6 @@
       --color-white-muted:  rgba(255, 255, 255, 0.7);
       --color-border-subtle: rgba(255, 255, 255, 0.15);
 
-      /* Big Froots palette */
       --bf-coral:    #F4613C;
       --bf-coral-dk: #C94220;
       --bf-teal:     #72b7a3;
@@ -58,23 +55,16 @@
       --bf-ink:      #313131;
       --bf-muted:    #6B7280;
 
-      /* Spacing */
       --section-pad-x: 4rem;
       --section-pad-y: 4rem;
-
-      /* Nav */
       --nav-h: 56px;
 
-      /* Fonts */
       --font-display: 'Sekuya', serif;
       --font-body:    'Atkinson Hyperlegible', monospace;
       --font-fredoka: 'Fredoka', sans-serif;
       --font-nunito:  'Nunito', sans-serif;
     }
 
-    /* ===================== */
-    /* RESET                 */
-    /* ===================== */
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -643,8 +633,6 @@
       padding-top: calc(var(--nav-h) + var(--section-pad-y));
     }
 
-    /* Grid: 2 columns on large screens, 1 on small.
-       Cards are free to fill rows naturally. */
     .visual-art-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -668,10 +656,7 @@
       transform: translateY(-3px);
     }
 
-    /* Game card spans both columns on wide screens */
-    .va-card--wide {
-      grid-column: 1 / -1;
-    }
+    .va-card--wide { grid-column: 1 / -1; }
 
     .va-card__video-wrap {
       width: 100%;
@@ -686,7 +671,6 @@
       display: block;
     }
 
-    /* Game iframe wrapper — full-size, interactive */
     .va-card__game-wrap {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -703,7 +687,6 @@
       display: block;
     }
 
-    /* Overlay that lifts on hover so user can interact */
     .va-card__game-overlay {
       position: absolute;
       inset: 0;
@@ -784,7 +767,6 @@
 
     .va-card__desc em { font-style: italic; }
 
-    /* Credit pill — for tool/asset attribution */
     .va-card__credit {
       display: inline-flex;
       align-items: center;
@@ -896,75 +878,66 @@
     .eleva-right {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    /* Venn diagram — reused from Eleva page */
-    .eleva-venn {
-      width: 100%;
-      max-width: 320px;
-      margin: 0 auto;
-    }
-
-    .eleva-venn-circle {
-      fill: transparent;
-      stroke: white;
-      stroke-width: 2;
-      stroke-dasharray: 565;
-      stroke-dashoffset: 565;
-      opacity: 0.75;
-      animation: elevaDraw 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .eleva-venn-circle:nth-child(1) { animation-delay: 0.2s; }
-    .eleva-venn-circle:nth-child(2) { animation-delay: 0.5s; }
-    .eleva-venn-circle:nth-child(3) { animation-delay: 0.8s; }
-
-    @keyframes elevaDraw { to { stroke-dashoffset: 0; } }
-
-    .eleva-venn-center {
-      fill: white;
-      opacity: 0;
-      animation: elevaFade 0.6s ease 1.5s forwards;
-    }
-
-    @keyframes elevaFade { to { opacity: 1; } }
-
-    .eleva-venn-labels text {
-      font-family: var(--font-body);
-      font-size: 12px;
-      fill: rgba(255,255,255,0.65);
-      text-anchor: middle;
-    }
-
-    .eleva-flow {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .eleva-flow-step {
-      display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 0.85rem 1.25rem;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      font-family: var(--font-body);
-      font-size: var(--text-sm);
-      line-height: 1.5;
+      justify-content: center;
+      padding-top: 1rem;
     }
 
-    .eleva-flow-step:last-child { border-bottom: none; }
+    /* ── Eleva Venn ─────────────────────────────────── */
+    .eleva-venn-svg {
+      width: 100%;
+      max-width: 420px;
+      overflow: visible;
+    }
 
-    .eleva-flow-num {
-      font-size: var(--text-xs);
+    .eleva-venn-svg circle {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.55);
+      stroke-width: 1.5;
+      opacity: 0;
+      animation: elevCircleFade 0.7s ease forwards;
+    }
+
+    .eleva-venn-svg circle:nth-child(1) { animation-delay: 0.1s; }
+    .eleva-venn-svg circle:nth-child(2) { animation-delay: 0.4s; }
+    .eleva-venn-svg circle:nth-child(3) { animation-delay: 0.7s; }
+
+    @keyframes elevCircleFade {
+      to { opacity: 1; }
+    }
+
+    .eleva-venn-svg .venn-overlap {
+      fill: rgba(255, 255, 255, 0.055);
+      stroke: none;
+      opacity: 0;
+      animation: elevCircleFade 0.5s ease 1.1s forwards;
+    }
+
+    .eleva-venn-svg .venn-center-dot {
+      fill: rgba(255, 255, 255, 0.9);
+      opacity: 0;
+      animation: elevCircleFade 0.4s ease 1.4s forwards;
+    }
+
+    .eleva-venn-svg .venn-label-outer {
+      font-family: 'Atkinson Hyperlegible', monospace;
+      font-size: 13px;
       font-weight: 700;
-      opacity: 0.35;
-      min-width: 1.5rem;
-      text-align: right;
+      fill: rgba(255, 255, 255, 0.65);
+      letter-spacing: 0.04em;
+      opacity: 0;
+      animation: elevCircleFade 0.5s ease 1s forwards;
+    }
+
+    .eleva-venn-svg .venn-label-center {
+      font-family: 'Atkinson Hyperlegible', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      fill: rgba(255, 255, 255, 0.9);
+      opacity: 0;
+      animation: elevCircleFade 0.4s ease 1.5s forwards;
     }
 
     .eleva-cta-row {
@@ -976,7 +949,7 @@
 
     @media (max-width: 860px) {
       .eleva-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .eleva-venn  { max-width: 260px; }
+      .eleva-venn-svg { max-width: 320px; }
     }
 
     /* ===================== */
@@ -1309,7 +1282,6 @@
 
       <div class="visual-art-grid">
 
-        <!-- PROJECT 1: CRYSTALLIZATION -->
         <article class="va-card">
           <div class="va-card__video-wrap">
             <video
@@ -1330,7 +1302,6 @@
           </div>
         </article>
 
-        <!-- PROJECT 2: GOYA -->
         <article class="va-card">
           <div class="va-card__video-wrap">
             <video
@@ -1350,7 +1321,6 @@
           </div>
         </article>
 
-        <!-- PROJECT 3: BiGGi -->
         <article class="va-card">
           <div class="va-card__iframe-wrap">
             <iframe src="visual1.html" title="BiGGi generative animation preview" scrolling="no" aria-hidden="true"></iframe>
@@ -1372,7 +1342,6 @@
           </div>
         </article>
 
-        <!-- PROJECT 4: AUTOBIOGRAPHICAL GAME — spans full width -->
         <article class="va-card va-card--wide">
           <div class="va-card__game-wrap" id="game-wrap">
             <img
@@ -1380,7 +1349,6 @@
               alt="Item Collector Adventure — home screen background"
               style="width:100%;height:100%;object-fit:cover;display:block;"
             />
-            <!-- Click-to-activate overlay — swaps image for live game on click -->
             <div class="va-card__game-overlay" id="game-overlay" role="button" tabindex="0" aria-label="Click to play the game">
               <span>Click to Play</span>
             </div>
@@ -1476,46 +1444,50 @@
           </div>
         </div>
 
-        <!-- RIGHT: DIAGRAM + FLOW -->
+        <!-- RIGHT: VENN DIAGRAM ONLY -->
         <div class="eleva-right">
+          <!--
+            Three-circle Venn. Centers form an equilateral triangle:
+              Top    (Business Value):  cx=210, cy=108
+              Bottom-left (Social Impact): cx=150, cy=215
+              Bottom-right (Tech Innovation): cx=270, cy=215
+            Radius = 88. All circles rendered at full size so overlaps are clear.
+          -->
+          <svg
+            class="eleva-venn-svg"
+            viewBox="0 0 420 340"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-label="Venn diagram: Social Impact, Tech Innovation, and Business Value overlap at Eleva"
+            role="img"
+          >
+            <!-- Circles -->
+            <circle cx="210" cy="108" r="88" />
+            <circle cx="150" cy="215" r="88" />
+            <circle cx="270" cy="215" r="88" />
 
-          <!-- Animated Venn -->
-          <svg class="eleva-venn" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="160" cy="160" r="90" class="eleva-venn-circle" />
-            <circle cx="240" cy="160" r="90" class="eleva-venn-circle" />
-            <circle cx="200" cy="110" r="90" class="eleva-venn-circle" />
-            <path class="eleva-venn-center" d="M200 150 C185 140 180 165 200 175 C220 165 215 140 200 150 Z" />
-            <g class="eleva-venn-labels">
-              <text x="118" y="194">Social</text>
-              <text x="118" y="208">Impact</text>
-              <text x="282" y="194">Tech</text>
-              <text x="282" y="208">Innovation</text>
-              <text x="200" y="80">Business</text>
-              <text x="200" y="94">Value</text>
-            </g>
+            <!-- Subtle fill in the triple-overlap zone (approximate ellipse) -->
+            <ellipse class="venn-overlap" cx="210" cy="182" rx="30" ry="26" />
+
+            <!-- Center dot -->
+            <circle class="venn-center-dot" cx="210" cy="182" r="4" />
+
+            <!-- Outer labels — positioned outside each circle -->
+            <!-- Business Value: above top circle -->
+            <text class="venn-label-outer" x="210" y="14" text-anchor="middle">Business Value</text>
+
+            <!-- Social Impact: lower-left -->
+            <text class="venn-label-outer" x="62" y="284" text-anchor="middle">Social</text>
+            <text class="venn-label-outer" x="62" y="300" text-anchor="middle">Impact</text>
+
+            <!-- Tech Innovation: lower-right -->
+            <text class="venn-label-outer" x="358" y="284" text-anchor="middle">Tech</text>
+            <text class="venn-label-outer" x="358" y="300" text-anchor="middle">Innovation</text>
+
+            <!-- Center label -->
+            <text class="venn-label-center" x="210" y="200" text-anchor="middle">Eleva</text>
           </svg>
-
-          <!-- User flow -->
-          <div class="eleva-flow" role="list" aria-label="Eleva user flow">
-            <div class="eleva-flow-step" role="listitem">
-              <span class="eleva-flow-num">01</span>
-              <span>Prompt a description of the app or task</span>
-            </div>
-            <div class="eleva-flow-step" role="listitem">
-              <span class="eleva-flow-num">02</span>
-              <span>Receive a minimum viable set of modules</span>
-            </div>
-            <div class="eleva-flow-step" role="listitem">
-              <span class="eleva-flow-num">03</span>
-              <span>Add or remove modules as needed</span>
-            </div>
-            <div class="eleva-flow-step" role="listitem">
-              <span class="eleva-flow-num">04</span>
-              <span>Modify, debug, and inspect memory traces</span>
-            </div>
-          </div>
-
         </div>
+
       </div>
     </div>
   </section>
@@ -1606,7 +1578,7 @@
     </div>
   </section>
 
-  <!-- ===================== -->
+  <!-- ===================== */
   <!-- FOOTER                -->
   <!-- ===================== -->
   <footer class="site-footer">
@@ -1663,12 +1635,10 @@
     sections.forEach(s => observer.observe(s));
 
     // ── Game click-to-activate overlay ───────────────────────────
-    // Shows bg_home.png as a static preview; swaps in the live iframe on click.
     const gameWrap    = document.getElementById("game-wrap");
     const gameOverlay = document.getElementById("game-overlay");
 
     function activateGame() {
-      // Replace the static image with the live iframe
       const img = gameWrap.querySelector("img");
       if (img) {
         const iframe = document.createElement("iframe");
@@ -1686,7 +1656,6 @@
       if (e.key === "Enter" || e.key === " ") activateGame();
     });
 
-    // Deactivate when user scrolls away (so scroll isn't trapped)
     const gameObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) {
