@@ -615,6 +615,118 @@
     .rcard__link:hover { background: rgba(209,0,184,0.28); border-color: rgba(209,0,184,0.5); transform: translateY(-1px); box-shadow: var(--glow-pink-sm); }
     .rcard__link svg { flex-shrink: 0; }
 
+    /* ── REJECTED WORK ── */
+    #rejected { background: #000; color: var(--color-white); position: relative; }
+    #rejected::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(60% 50% at 78% 18%, rgba(209,0,184,0.10), transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    #rejected .section-content { position: relative; z-index: 1; min-height: 100svh; padding-top: calc(var(--nav-h) + var(--section-pad-y)); align-items: flex-start; }
+
+    .rj-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 4px 14px 4px 12px; border-radius: 99px;
+      background: rgba(209,0,184,0.12); border: 1px solid rgba(209,0,184,0.35);
+      font-family: var(--font-body); font-size: var(--text-xs); font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #e060d8;
+      margin-bottom: 1.5rem; width: fit-content; box-shadow: var(--glow-pink-sm);
+    }
+    .rj-badge svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .rj-intro {
+      font-family: var(--font-body); font-size: var(--text-base); line-height: 1.8;
+      opacity: 0.82; max-width: 720px; margin-bottom: 3rem;
+    }
+    .rj-intro strong { font-weight: 700; opacity: 1; }
+
+    .rj-card {
+      display: flex; flex-direction: column;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(209,0,184,0.18);
+      border-radius: 18px; overflow: hidden;
+      width: 100%; max-width: 1000px;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+    }
+
+    .rj-card__media { position: relative; background: #000; border-bottom: 1px solid rgba(209,0,184,0.18); }
+    .rj-video-wrap { width: 100%; aspect-ratio: 16 / 9; background: #000; }
+    .rj-video-wrap video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
+
+    /* Their verdict — rubber stamp on the artwork */
+    .rj-stamp {
+      position: absolute; top: 18px; right: 18px; z-index: 2;
+      font-family: var(--font-body); font-weight: 700;
+      font-size: clamp(0.85rem, 2vw, 1.15rem); letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255, 70, 70, 0.92);
+      border: 3px solid rgba(255, 70, 70, 0.8);
+      border-radius: 6px; padding: 0.3rem 0.85rem;
+      transform: rotate(-11deg);
+      text-shadow: 0 0 1px rgba(255,70,70,0.4);
+      box-shadow: inset 0 0 0 1px rgba(255,70,70,0.25);
+      pointer-events: none; opacity: 0.92;
+    }
+
+    .rj-media-note {
+      font-family: var(--font-body); font-size: var(--text-xs); line-height: 1.6;
+      opacity: 0.55; padding: 0.65rem 1rem; text-align: center;
+      border-bottom: 1px solid rgba(209,0,184,0.12);
+    }
+    .rj-media-note a { color: #e060d8; text-decoration: underline; text-decoration-color: rgba(224,96,216,0.4); }
+    .rj-media-note a:hover { text-decoration-color: #e060d8; }
+
+    .rj-body { padding: 1.85rem 2.1rem 2.1rem; display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .rj-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 0.85rem; font-family: var(--font-body); font-size: var(--text-xs); opacity: 0.6; letter-spacing: 0.04em; }
+    .rj-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .rj-meta strong { color: #e060d8; opacity: 0.9; font-weight: 700; }
+
+    .rj-title { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 400; line-height: 1.25; letter-spacing: 0.02em; text-shadow: var(--glow-pink-sm); }
+    .rj-title em { font-style: italic; }
+
+    .rj-author { font-family: var(--font-body); font-size: var(--text-sm); opacity: 0.7; margin-top: -0.4rem; }
+    .rj-author a { color: #e060d8; text-decoration: none; border-bottom: 1px solid rgba(224,96,216,0.35); }
+    .rj-author a:hover { border-bottom-color: #e060d8; }
+
+    .rj-tldr {
+      border-left: 2px solid rgba(209,0,184,0.5);
+      padding: 0.4rem 0 0.4rem 1rem;
+      font-family: var(--font-body); font-size: var(--text-base); line-height: 1.7; opacity: 0.9;
+    }
+    .rj-tldr strong { display: block; font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.3rem; font-weight: 700; }
+
+    .rj-abstract { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.8; opacity: 0.85; }
+    .rj-abstract em { font-style: italic; }
+
+    .rj-keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .rj-tag { display: inline-block; padding: 3px 10px; border-radius: 99px; font-family: var(--font-body); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: rgba(209,0,184,0.12); color: #e060d8; border: 1px solid rgba(209,0,184,0.26); }
+
+    /* The author's counter-verdict */
+    .rj-verdict {
+      position: relative;
+      margin-top: 0.4rem; padding: 1.3rem 1.5rem;
+      background: rgba(209,0,184,0.06);
+      border: 1px solid rgba(209,0,184,0.22);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .rj-verdict p { font-family: var(--font-body); font-size: var(--text-base); line-height: 1.8; opacity: 0.92; max-width: 70ch; }
+    .rj-verdict p strong { font-weight: 700; color: #f06bdf; opacity: 1; }
+    .rj-counterstamp {
+      margin-top: 1rem;
+      display: inline-block;
+      font-family: var(--font-body); font-weight: 700;
+      font-size: clamp(0.95rem, 2.4vw, 1.3rem); letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--bf-teal);
+      border: 3px solid rgba(114,183,163,0.7);
+      border-radius: 6px; padding: 0.3rem 0.9rem;
+      transform: rotate(-3deg);
+      box-shadow: inset 0 0 0 1px rgba(114,183,163,0.25), 0 0 18px rgba(114,183,163,0.12);
+    }
+
+    .rj-ctas { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-top: 0.4rem; }
+
     /* ── FOOTER ── */
     .site-footer { width: 100%; text-align: center; padding: 1.25rem 2rem; background: rgba(0,0,0,0.9); border-top: 1px solid rgba(209,0,184,0.2); color: var(--color-white); font-family: var(--font-body); font-size: var(--text-xs); opacity: 0.8; }
 
@@ -725,6 +837,8 @@
       .bf-pcard__body { padding: 1rem 1.1rem 1.1rem; }
       .va-card__body { padding: 1.1rem; }
       .rcard__body { padding: 1.1rem 1.25rem 1.25rem; }
+      .rj-body { padding: 1.25rem 1.25rem 1.4rem; }
+      .rj-verdict { padding: 1rem 1.1rem; }
     }
 
     /* ════════════════════════════════
@@ -779,6 +893,7 @@
       <li><a href="#eleva">Eleva</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
+      <li><a href="#rejected">Rejected</a></li>
     </ul>
   </nav>
 
@@ -1179,6 +1294,106 @@
     </div>
   </section>
 
+  <!-- REJECTED WORK -->
+  <section id="rejected">
+    <div class="section-content">
+      <div class="rj-badge" aria-label="Officially rejected, proudly displayed">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M4 12L12 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        Officially rejected · proudly displayed
+      </div>
+      <h1 class="section-heading">Rejected Work</h1>
+      <p class="rj-intro">
+        Not everything makes the cut — and that's worth showing too. This piece was
+        submitted to a peer-reviewed venue and turned down. I'm keeping it here, unedited,
+        review and all. <strong>The verdict was theirs. The final word is mine.</strong>
+      </p>
+
+      <article class="rj-card">
+        <div class="rj-card__media">
+          <div class="rj-video-wrap">
+            <video controls preload="metadata" playsinline
+                   aria-label="The Most Accurate Fortune Teller — video preview">
+              <source src="https://openreview.net/attachment?id=7pJFJ4kYPC&amp;name=video_preview_for_artwork" type="video/mp4" />
+              Your browser can't play this preview.
+              <a href="https://openreview.net/attachment?id=7pJFJ4kYPC&amp;name=video_preview_for_artwork">Download the video</a>.
+            </video>
+          </div>
+          <span class="rj-stamp" aria-hidden="true">Rejected</span>
+        </div>
+
+        <p class="rj-media-note">
+          Preview hosted on OpenReview. If it doesn't play above,
+          <a href="https://openreview.net/attachment?id=7pJFJ4kYPC&amp;name=video_preview_for_artwork" target="_blank" rel="noopener">watch it on OpenReview&nbsp;↗</a>.
+        </p>
+
+        <div class="rj-body">
+          <div class="rj-meta">
+            <span><strong>Track</strong> Artwork</span>
+            <span><strong>Venue</strong> NeurIPS Creative AI Track 2025</span>
+            <span><strong>Submitted</strong> 07 Aug 2025</span>
+            <span><strong>Modified</strong> 09 Nov 2025</span>
+            <span><strong>License</strong> CC BY 4.0</span>
+          </div>
+
+          <h2 class="rj-title">
+            The Most Accurate Fortune Teller: <em>An AI-Enhanced Pseudoscientific Toy as a Thought Experiment</em>
+          </h2>
+          <p class="rj-author">
+            <a href="https://openreview.net/profile?id=~Guadalupe_Selene_V%C3%A1squez-Fabela1" target="_blank" rel="noopener">Guadalupe Selene Vásquez-Fabela</a>
+          </p>
+
+          <div class="rj-tldr">
+            <strong>TL;DR</strong>
+            A satirical, AI-powered toy that mimics a mystic ritual — using heart-rate input and
+            vague algorithmic messages to explore how belief, emotion, and pseudoscience shape
+            the way we interact with technology and AI.
+          </div>
+
+          <p class="rj-abstract">
+            <em>"The Most Accurate Fortune Teller"</em> is not just a toy, but a philosophical
+            provocation. Using biometric input (heart rate), emotional feedback (vibration in a
+            heartbeat pattern), and artificial intelligence, it simulates the generation of a
+            meaningful message — while intentionally manipulating perception to expose the
+            epistemic shallowness behind it. Its purpose is to demonstrate how easily people
+            attribute meaning and depth to vague, data-driven outputs when those outputs are
+            framed with emotional cues, deceptive seduction, and a technological complexity
+            that looks mystical.
+          </p>
+
+          <div class="rj-keywords" aria-label="Keywords">
+            <span class="rj-tag">AI</span>
+            <span class="rj-tag">Pseudoscience</span>
+            <span class="rj-tag">Biofeedback</span>
+            <span class="rj-tag">Fortune Telling</span>
+            <span class="rj-tag">Fortune Teller</span>
+            <span class="rj-tag">Heart Rate</span>
+          </div>
+
+          <div class="rj-verdict">
+            <p>
+              This was my <strong>final project for Spring 2025</strong>. I submitted it to the
+              NeurIPS Creative AI Track 2025, and it was politely shown the door — rating
+              <strong>2: "ok but not good enough, weak rejection."</strong> So I did my own peer
+              review of their peer review and reached a verdict of my own:
+              <strong>I reject their rejection.</strong> The most accurate fortune teller did not
+              see this coming. Neither, apparently, did the reviewers. I'm choosing to read that
+              as a feature.
+            </p>
+            <span class="rj-counterstamp" aria-hidden="true">Rejection Rejected</span>
+          </div>
+
+          <div class="rj-ctas">
+            <a href="fortune.html" class="pub-link">See more about the rejection →</a>
+            <a href="https://openreview.net/forum?id=7pJFJ4kYPC" target="_blank" rel="noopener" class="btn btn--ghost">View on OpenReview ↗</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer class="site-footer">
     <p>© 2026 Lupita Vásquez Fabela. All rights reserved.</p>
@@ -1186,6 +1401,7 @@
 
   <script>
     document.querySelectorAll("video").forEach(video => {
+      if (video.controls) return; // user-controlled videos shouldn't auto-loop or force play
       video.addEventListener("ended", () => { video.currentTime = 0; video.play().catch(() => {}); });
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden && video.paused) video.play().catch(() => {});
