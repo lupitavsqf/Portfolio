@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Most Accurate Fortune Teller — NeurIPS 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Sekuya&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink:         #d100b8;
+      --pink-dim:     rgba(209,0,184,0.18);
+      --pink-border:  rgba(209,0,184,0.3);
+      --red:          #e03535;
+      --red-dim:      rgba(224,53,53,0.12);
+      --red-border:   rgba(224,53,53,0.3);
+      --white:        #ffffff;
+      --muted:        rgba(255,255,255,0.6);
+      --subtler:      rgba(255,255,255,0.38);
+      --nav-h:        56px;
+      --font-display: 'Sekuya', serif;
+      --font-body:    'Atkinson Hyperlegible', monospace;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #050505;
+      color: var(--white);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(209,0,184,0.2);
+    }
+    .nav__back {
+      font-family: var(--font-body); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white); text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .nav__back:hover { opacity: 1; }
+    .nav__title {
+      font-family: var(--font-display); font-size: 0.9rem;
+      opacity: 0.8; letter-spacing: 0.04em;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + 3rem) 2rem 3rem;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(209,0,184,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* REJECTED STAMP */
+    .stamp-wrap {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .stamp {
+      display: inline-block;
+      border: 3px solid var(--red);
+      border-radius: 8px;
+      padding: 0.35rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      transform: rotate(-8deg);
+      opacity: 0.88;
+      box-shadow: 0 0 18px rgba(224,53,53,0.3), inset 0 0 8px rgba(224,53,53,0.06);
+      animation: stampIn 0.35s cubic-bezier(0.34,1.56,0.64,1) 0.4s both;
+    }
+    @keyframes stampIn {
+      from { transform: rotate(-8deg) scale(2.5); opacity: 0; }
+      to   { transform: rotate(-8deg) scale(1);   opacity: 0.88; }
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 40px rgba(209,0,184,0.3);
+    }
+    .hero-sub {
+      font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--pink); margin-bottom: 0.5rem;
+      opacity: 0.85;
+    }
+    .hero-meta {
+      font-size: 0.82rem; opacity: 0.55;
+      letter-spacing: 0.05em; margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-meta a {
+      color: inherit; text-decoration: underline;
+      text-underline-offset: 3px; transition: opacity 0.2s;
+    }
+    .hero-meta a:hover { opacity: 1; color: var(--white); }
+
+    /* VIDEO */
+    .video-wrapper {
+      width: 100%; max-width: 700px;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(209,0,184,0.25);
+      box-shadow: 0 0 40px rgba(209,0,184,0.1);
+      margin: 0 auto 2rem;
+      background: #0a0a0a;
+    }
+    .video-wrapper iframe, .video-wrapper video {
+      width: 100%; height: 100%; border: none; display: block;
+    }
+    .video-note {
+      font-size: 0.75rem; opacity: 0.4;
+      letter-spacing: 0.05em; margin-bottom: 2.5rem;
+    }
+
+    /* ABSTRACT */
+    .abstract-block {
+      max-width: 680px; margin: 0 auto 3rem;
+      text-align: left;
+      border-left: 2px solid var(--pink-border);
+      padding-left: 1.5rem;
+    }
+    .abstract-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--pink);
+      opacity: 0.8; margin-bottom: 0.6rem;
+    }
+    .abstract-text {
+      font-size: 0.9rem; line-height: 1.8; opacity: 0.82;
+    }
+
+    /* METADATA PILLS */
+    .meta-pills {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center; margin-bottom: 3rem;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pill--pink { background: var(--pink-dim); color: #e060d8; border: 1px solid var(--pink-border); }
+    .pill--red  { background: var(--red-dim);  color: #ff7070; border: 1px solid var(--red-border); }
+    .pill--gray { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.12); }
+
+    /* SECTION HEADING */
+    .section-wrap {
+      max-width: 780px; margin: 0 auto 5rem;
+      padding: 0 2rem;
+      text-align: left;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.75rem;
+      text-shadow: 0 0 30px rgba(209,0,184,0.3);
+    }
+
+    /* REVIEW CARD */
+    .review-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(209,0,184,0.15);
+      border-radius: 14px;
+      padding: 2rem 2.25rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .review-header {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .reviewer-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(209,0,184,0.15);
+      border: 1px solid var(--pink-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: #e060d8;
+      flex-shrink: 0;
+    }
+    .reviewer-info { flex: 1; }
+    .reviewer-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .reviewer-meta { font-size: 0.75rem; opacity: 0.5; letter-spacing: 0.04em; }
+    .rating-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 5px 12px; border-radius: 99px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em;
+      background: var(--red-dim); color: #ff8080; border: 1px solid var(--red-border);
+      white-space: nowrap;
+    }
+    .rating-dot { width: 6px; height: 6px; border-radius: 50%; background: #ff6060; }
+
+    .review-section { margin-bottom: 1.25rem; }
+    .review-section-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; opacity: 0.45; margin-bottom: 0.4rem;
+    }
+    .review-section-text {
+      font-size: 0.88rem; line-height: 1.75; opacity: 0.82;
+    }
+    .review-section-text strong { font-weight: 700; opacity: 1; color: var(--white); }
+    .review-section-text em { font-style: italic; }
+
+    .strengths-list, .weaknesses-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .strengths-list li, .weaknesses-list li {
+      display: flex; gap: 0.6rem; font-size: 0.88rem; line-height: 1.65; opacity: 0.82;
+    }
+    .strengths-list li::before { content: '+'; color: #72b7a3; font-weight: 700; flex-shrink: 0; }
+    .weaknesses-list li::before { content: '−'; color: #ff8080; font-weight: 700; flex-shrink: 0; }
+
+    .review-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 1.25rem 0;
+    }
+
+    /* REBUTTAL / COUNTER-REJECTION */
+    .rebuttal-card {
+      background: rgba(209,0,184,0.06);
+      border: 1px solid rgba(209,0,184,0.28);
+      border-radius: 14px;
+      padding: 2rem 2.25rem;
+      position: relative;
+      margin-bottom: 3rem;
+    }
+    .rebuttal-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #e060d8; opacity: 0.85;
+      margin-bottom: 1rem;
+    }
+    .rebuttal-text {
+      font-size: 0.92rem; line-height: 1.82; opacity: 0.88;
+    }
+    .rebuttal-stamp {
+      display: inline-block;
+      border: 2px solid var(--pink);
+      border-radius: 6px;
+      padding: 0.25rem 0.9rem;
+      font-family: var(--font-body);
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--pink);
+      transform: rotate(-4deg);
+      display: block; width: fit-content;
+      margin-top: 1.25rem;
+      box-shadow: 0 0 14px rgba(209,0,184,0.25);
+      animation: stampIn 0.3s cubic-bezier(0.34,1.56,0.64,1) 0.8s both;
+    }
+
+    /* FORTUNE MACHINE */
+    .fortune-machine {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(209,0,184,0.2);
+      border-radius: 16px;
+      padding: 2.5rem 2.25rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .fortune-machine::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), transparent);
+    }
+    .fortune-machine-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem; letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 20px rgba(209,0,184,0.4);
+    }
+    .fortune-machine-sub {
+      font-size: 0.78rem; opacity: 0.45; letter-spacing: 0.06em;
+      margin-bottom: 2rem; text-transform: uppercase;
+    }
+    .heart-rate-display {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.75rem; margin-bottom: 1.5rem;
+    }
+    .heart-icon {
+      font-size: 1.4rem;
+      animation: heartbeat 1.2s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%  { transform: scale(1.25); }
+      28%  { transform: scale(1); }
+      42%  { transform: scale(1.15); }
+      70%  { transform: scale(1); }
+    }
+    .bpm-label {
+      font-family: var(--font-body); font-size: 0.78rem;
+      font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; opacity: 0.5;
+    }
+    .bpm-value {
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--pink); letter-spacing: -0.02em;
+      text-shadow: 0 0 18px rgba(209,0,184,0.5);
+    }
+
+    .fortune-output {
+      min-height: 90px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.75rem;
+    }
+    .fortune-text {
+      font-size: 1.05rem; line-height: 1.85;
+      font-style: italic; opacity: 0.9;
+      max-width: 520px;
+      letter-spacing: 0.01em;
+      transition: opacity 0.3s ease;
+    }
+    .fortune-text.fading { opacity: 0; }
+
+    .btn-fortune {
+      display: inline-block;
+      padding: 0.65rem 1.6rem;
+      font-family: var(--font-body);
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--white);
+      background: rgba(209,0,184,0.15);
+      border: 1px solid rgba(209,0,184,0.4);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      box-shadow: 0 0 14px rgba(209,0,184,0.15);
+    }
+    .btn-fortune:hover {
+      background: rgba(209,0,184,0.25);
+      box-shadow: 0 0 28px rgba(209,0,184,0.3);
+      transform: translateY(-2px);
+    }
+    .btn-fortune:active { transform: translateY(0); }
+    .fortune-disclaimer {
+      font-size: 0.7rem; opacity: 0.3; margin-top: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* FOOTER */
+    .page-footer {
+      text-align: center; padding: 1.5rem 2rem;
+      border-top: 1px solid rgba(209,0,184,0.15);
+      font-size: 0.75rem; opacity: 0.45;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 640px) {
+      .nav { padding: 0 1.25rem; }
+      .review-card, .rebuttal-card, .fortune-machine { padding: 1.5rem 1.25rem; }
+      .section-wrap { padding: 0 1.25rem; margin-bottom: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="nav__back" href="index.html">← Portfolio</a>
+    <span class="nav__title">Lupita Vásquez Fabela</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="stamp-wrap">
+      <span class="stamp">Rejected</span>
+    </div>
+    <p class="hero-sub">NeurIPS Creative AI Track 2025 · Artwork</p>
+    <h1 class="hero-title">The Most Accurate Fortune Teller</h1>
+    <p class="hero-meta">
+      An AI-Enhanced Pseudoscientific Toy As a Thought Experiment<br />
+      <a href="https://openreview.net/profile?id=~Guadalupe_Selene_V%C3%A1squez-Fabela1" target="_blank" rel="noopener">Guadalupe Selene Vásquez-Fabela</a>
+      &nbsp;·&nbsp; Submitted 07 Aug 2025 &nbsp;·&nbsp;
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+    </p>
+
+    <div class="meta-pills">
+      <span class="pill pill--pink">AI</span>
+      <span class="pill pill--pink">Pseudoscience</span>
+      <span class="pill pill--pink">Biofeedback</span>
+      <span class="pill pill--pink">Heart Rate</span>
+      <span class="pill pill--pink">Fortune Telling</span>
+      <span class="pill pill--red">Spring 2025 Final Project</span>
+      <span class="pill pill--gray">Track: Artwork</span>
+    </div>
+
+    <div class="video-wrapper">
+      <iframe
+        src="https://openreview.net/attachment?id=7pJFJ4kYPC&name=video_preview_for_artwork"
+        title="The Most Accurate Fortune Teller — video preview"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <p class="video-note">Video preview · openreview.net</p>
+
+    <div class="abstract-block">
+      <p class="abstract-label">Abstract</p>
+      <p class="abstract-text">
+        "The Most Accurate Fortune Teller" is not just a toy, but a philosophical provocation. Using biometric input (heart rate), emotional feedback (vibration in a heart-beat pattern), and artificial intelligence, it simulates the generation of a meaningful message, at the same time it intentionally manipulates perception to expose the epistemic shallowness behind it. Its purpose is demonstrating how easily people can attribute meaning and depth to vague data-driven outputs when framed with emotional cues, deceptive seduction, and technological complexity that looks mystical.
+      </p>
+    </div>
+  </section>
+
+  <!-- REVIEW -->
+  <div class="section-wrap">
+    <h2 class="section-heading">The Official Rejection</h2>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="reviewer-avatar">k5K</div>
+        <div class="reviewer-info">
+          <div class="reviewer-name">Reviewer k5K2</div>
+          <div class="reviewer-meta">31 Aug 2025 &nbsp;·&nbsp; Modified 27 Sep 2025 &nbsp;·&nbsp; NeurIPS Creative AI Track</div>
+        </div>
+        <div class="rating-badge">
+          <span class="rating-dot"></span>
+          2/5 — Weak rejection
+        </div>
+      </div>
+
+      <div class="review-section">
+        <p class="review-section-label">Quality</p>
+        <p class="review-section-text">
+          The work is conceptually clear, drawing on historical and philosophical references to frame the toy as a critique of pseudoscience. However, the technical side is basic, using a simple heart rate sensor and <em>pre-scripted AI outputs</em>.
+        </p>
+      </div>
+      <hr class="review-divider" />
+      <div class="review-section">
+        <p class="review-section-label">Clarity</p>
+        <p class="review-section-text">The artistic intent is clear and the critique of AI mystification is easy to follow, but the process feels underdeveloped. As a critical gesture, it could be pushed further.</p>
+      </div>
+      <hr class="review-divider" />
+      <div class="review-section">
+        <p class="review-section-label">Originality</p>
+        <p class="review-section-text">
+          The use of AI to parody fortune telling and expose epistemic emptiness is conceptually interesting, though the implementation — mapping heart rate ranges to fortune types — is straightforward.
+        </p>
+      </div>
+      <hr class="review-divider" />
+      <div class="review-section">
+        <p class="review-section-label">Significance</p>
+        <p class="review-section-text">
+          The project's strength lies in sparking reflection about trust in AI and pseudoscience. Yet the interaction design may undermine its impact: assigning <em>"anxious"</em> fortunes to high heart rates lacks clear rationale, and could frustrate or disengage audiences rather than provoke critical insight.
+        </p>
+      </div>
+      <hr class="review-divider" />
+      <div class="review-section">
+        <p class="review-section-label">Strengths</p>
+        <ul class="strengths-list">
+          <li>Good conceptual framing, connecting AI critique to pseudoscience and superstition.</li>
+          <li>Clever use of a simple toy format to expose how meaning is easily projected onto vague outputs.</li>
+        </ul>
+      </div>
+      <hr class="review-divider" />
+      <div class="review-section">
+        <p class="review-section-label">Weaknesses</p>
+        <ul class="weaknesses-list">
+          <li>The interaction design feels arbitrary (e.g., giving anxious messages when the user's heart rate is already high), which may reduce engagement and dilute the critique.</li>
+          <li>Technically minimal: relies on ChatGPT with three sets of scripted responses, offering little novelty.</li>
+          <li>Audience impact is uncertain, as the system risks being more frustrating than thought-provoking.</li>
+        </ul>
+      </div>
+      <hr class="review-divider" />
+      <div class="review-section">
+        <p class="review-section-label">Suggestion</p>
+        <p class="review-section-text">
+          Exploring collective or dialogic interactions (multiple users comparing fortunes) might also strengthen the piece's performative and critical impact.
+        </p>
+      </div>
+      <hr class="review-divider" />
+      <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <div>
+          <p class="review-section-label">Rating</p>
+          <p class="review-section-text"><strong>2: Ok but not good enough</strong> — weak rejection</p>
+        </div>
+        <div>
+          <p class="review-section-label">Confidence</p>
+          <p class="review-section-text"><strong>4:</strong> The reviewer is confident but not absolutely certain.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- REBUTTAL -->
+    <div class="rebuttal-card">
+      <p class="rebuttal-label">Author's Response</p>
+      <p class="rebuttal-text">
+        That the interaction design "feels arbitrary" is exactly the point. A fortune teller that gives you <em>calm</em> messages when you're calm and <em>anxious</em> ones when you're anxious would be a wellness app — not a provocation. The friction is the critique. The frustration is the artwork.
+        <br /><br />
+        "Technically minimal" is also a conceptual statement: the piece demonstrates that you don't need technical depth to produce perceived profundity. Three scripted responses and a pulse sensor are enough to make people believe in prophecy. That <em>is</em> the argument.
+        <br /><br />
+        Furthermore, this was a final project for the semester Spring 2025 — built in weeks, not years. NeurIPS got a philosophical satire that made its thesis <em>through</em> its limitations. The board of reviewers, meanwhile, proved the thesis by failing to recognize the epistemic trap they were already standing in.
+        <br /><br />
+        With full respect and considerable amusement:
+      </p>
+      <span class="rebuttal-stamp">Rejection rejected.</span>
+    </div>
+
+    <!-- FORTUNE MACHINE -->
+    <h2 class="section-heading">Another Fortune, Since You're Here</h2>
+    <div class="fortune-machine">
+      <p class="fortune-machine-title">The Most Accurate Fortune Teller</p>
+      <p class="fortune-machine-sub">AI-Enhanced Pseudoscientific Toy</p>
+
+      <div class="heart-rate-display">
+        <span class="heart-icon">♥</span>
+        <span class="bpm-label">BPM</span>
+        <span class="bpm-value" id="bpm">--</span>
+      </div>
+
+      <div class="fortune-output">
+        <p class="fortune-text" id="fortune-text">
+          <em>Tap below to consult the oracle. Your biometric data has already been recorded and deemed highly symbolic.</em>
+        </p>
+      </div>
+
+      <button class="btn-fortune" id="fortune-btn" onclick="getFortune()">Consult the Oracle</button>
+      <p class="fortune-disclaimer">* No actual biometric data is collected. Any perceived meaning is your own projection. This is the point.</p>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    © 2026 Lupita Vásquez Fabela · All rights reserved · NeurIPS 2025 Submission #7pJFJ4kYPC
+  </footer>
+
+  <script>
+    const fortunes = [
+      "The algorithm sees a restlessness in your pulse — not anxiety, but the productive kind. A threshold is near. Step through it before the data resets.",
+      "Your heart rate suggests you have recently made a decision you haven't fully admitted to yourself. The machine confirms: you already know the answer.",
+      "The oracle detects elevated biometric engagement. This is either excitement or dread. Both are valid forms of paying attention.",
+      "Your vital signs indicate you are currently oscillating between two futures. The machine cannot choose for you. But it notes that one of them involves significantly more sleep.",
+      "The sensor reads a regularity in your rhythm that suggests you have been here before — this precise junction of uncertainty and readiness. Last time, you moved forward anyway.",
+      "Biometric analysis complete: your body is doing the thing bodies do when they are about to understand something. This fortune is merely the last step before the insight arrives on its own.",
+      "The oracle has processed your data and found it ambiguous. This is not a failure of the machine. It is a feature. Ambiguity is where meaning lives.",
+      "Your heart rate has been cross-referenced with seventeen thousand prior readings. The result is unique. The machine has never seen precisely this configuration of hesitation before.",
+      "You are carrying something that was given to you by someone who no longer carries it themselves. The machine recommends setting it down somewhere scenic.",
+      "The oracle notes: the reviewer who rated this work a 2 out of 5 had a resting heart rate of 74 BPM and attributed great significance to the machine's output. So do you, if you are reading this carefully.",
+    ];
+
+    let bpmInterval;
+    let currentBpm = Math.floor(Math.random() * 30) + 62;
+
+    function simulateBpm() {
+      clearInterval(bpmInterval);
+      bpmInterval = setInterval(() => {
+        const delta = Math.random() > 0.5 ? 1 : -1;
+        currentBpm = Math.max(58, Math.min(110, currentBpm + delta));
+        document.getElementById('bpm').textContent = currentBpm;
+      }, 900);
+    }
+
+    async function getFortune() {
+      const btn = document.getElementById('fortune-btn');
+      const textEl = document.getElementById('fortune-text');
+      const bpmEl = document.getElementById('bpm');
+
+      btn.disabled = true;
+      btn.textContent = 'Reading your vital signs…';
+
+      textEl.classList.add('fading');
+
+      let spike = currentBpm;
+      let steps = 0;
+      const spikeInterval = setInterval(() => {
+        spike = Math.min(118, spike + Math.floor(Math.random() * 4));
+        bpmEl.textContent = spike;
+        steps++;
+        if (steps > 8) {
+          clearInterval(spikeInterval);
+          simulateBpm();
+        }
+      }, 120);
+
+      await new Promise(r => setTimeout(r, 1400));
+
+      try {
+        const response = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: "claude-sonnet-4-20250514",
+            max_tokens: 1000,
+            messages: [{
+              role: "user",
+              content: `You are "The Most Accurate Fortune Teller" — a satirical AI artwork that parodies pseudoscience and fortune-telling. You generate vague-but-emotionally-resonant fortune messages that seem profound but are intentionally constructed to expose how easily people attribute meaning to ambiguous outputs when framed with emotional cues.
+
+The user's current heart rate reading: ${spike} BPM.
+
+Generate ONE fortune message that:
+- Is 2-4 sentences long
+- Sounds eerily specific but is technically universal
+- Subtly references the biometric input without being obvious about it
+- Has a slightly unsettling, oracular quality
+- Does NOT end with a call to action or self-help advice
+- Is written in second person ("you", "your")
+
+Return ONLY the fortune message, no preamble, no quotation marks around the whole thing.`
+            }]
+          })
+        });
+
+        const data = await response.json();
+        const msg = data?.content?.[0]?.text?.trim();
+
+        await new Promise(r => setTimeout(r, 200));
+        textEl.classList.remove('fading');
+        textEl.innerHTML = msg ? `<em>${msg}</em>` : `<em>${fortunes[Math.floor(Math.random() * fortunes.length)]}</em>`;
+      } catch {
+        const fallback = fortunes[Math.floor(Math.random() * fortunes.length)];
+        textEl.classList.remove('fading');
+        textEl.innerHTML = `<em>${fallback}</em>`;
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Consult the Oracle Again';
+    }
+
+    simulateBpm();
+  </script>
+</body>
+</html>
