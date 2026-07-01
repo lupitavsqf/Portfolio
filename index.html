@@ -445,7 +445,7 @@
     /* ── VISUAL ART ── */
     #visual { background: #000; color: var(--color-white); }
 
-    #visual .section-content { min-height: 100svh; padding-top: calc(var(--nav-h) + var(--section-pad-y)); }
+    #visual .section-content { min-height: 100svh; padding-top: calc(var(--nav-h) + var(--section-pad-y)); align-items: center; }
 
     .visual-art-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; width: 100%; max-width: 1200px; }
 
@@ -515,7 +515,7 @@
     .va-card__credit a:hover { color: rgba(255,255,255,0.85); }
 
     /* ── ELEVA ── */
-    #eleva .section-content { justify-content: center; align-items: flex-start; padding-top: calc(var(--nav-h) + var(--section-pad-y)); gap: 3rem; }
+    #eleva .section-content { justify-content: center; align-items: center; padding-top: calc(var(--nav-h) + var(--section-pad-y)); gap: 3rem; }
 
     .eleva-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start; width: 100%; max-width: 1100px; }
 
@@ -555,7 +555,7 @@
     /* ── RESEARCH ── */
     #research { background: #000; color: var(--color-white); }
 
-    #research .section-content { min-height: 100svh; padding-top: calc(var(--nav-h) + var(--section-pad-y)); align-items: flex-start; gap: 0; }
+    #research .section-content { min-height: 100svh; padding-top: calc(var(--nav-h) + var(--section-pad-y)); align-items: center; gap: 0; }
 
     .research-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 4px 14px 4px 10px; border-radius: 99px; background: rgba(209,0,184,0.12); border: 1px solid rgba(209,0,184,0.35); font-family: var(--font-body); font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #e060d8; margin-bottom: 1.75rem; width: fit-content; box-shadow: var(--glow-pink-sm); }
 
@@ -624,7 +624,7 @@
       background: radial-gradient(60% 50% at 78% 18%, rgba(209,0,184,0.10), transparent 70%);
       pointer-events: none; z-index: 0;
     }
-    #rejected .section-content { position: relative; z-index: 1; min-height: 100svh; padding-top: calc(var(--nav-h) + var(--section-pad-y)); align-items: flex-start; }
+    #rejected .section-content { position: relative; z-index: 1; min-height: 100svh; padding-top: calc(var(--nav-h) + var(--section-pad-y)); align-items: center; }
 
     .rj-badge {
       display: inline-flex; align-items: center; gap: 0.5rem;
@@ -1014,7 +1014,7 @@
             <img src="covers/cybercowboys.png" alt="CyberCowboys — augmented-reality horse-riding lessons through Snap Spectacles" />
           </div>
           <div class="bf-pcard__body">
-            <span class="bf-tag bf-tag--pink">XR Therapy · 2025</span>
+            <span class="bf-tag bf-tag--pink">Assistive AR · 2025</span>
             <h2 class="bf-pcard__title">CyberCowboys</h2>
             <p class="bf-pcard__desc">
               An <strong>augmented-reality riding experience</strong> for Snap Spectacles — projecting
@@ -1081,7 +1081,7 @@
             <a href="https://lupitavsqf.github.io/BIG-FROOTS/producto2.html" target="_blank" rel="noopener" class="pub-link" aria-label="See more about BiGGi">See more…</a>
           </div>
         </article>
-        <article class="va-card va-card--wide">
+        <article class="va-card">
           <div class="va-card__game-wrap" id="game-wrap">
             <img src="https://lupitavsqf.github.io/autobiographical-game/bg_home.png" alt="Item Collector Adventure — home screen background" style="width:100%;height:100%;object-fit:cover;display:block;" />
             <div class="va-card__game-overlay" id="game-overlay" role="button" tabindex="0" aria-label="Click to play the game">
@@ -1091,21 +1091,13 @@
           <div class="va-card__body">
             <h2 class="va-card__title">Item Collector Adventure</h2>
             <p class="va-card__desc">
-              An autobiographical maze game built with <strong>p5.js</strong> — six levels, each
-              a chapter of a life: childhood on a farm, high school, undergraduate chemistry,
-              professional life, a sabbatical in China, and graduate school in New York City.
-              Each level asks you to collect artifacts that mark that period, navigating
-              procedurally generated labyrinths with original music and sound design.
-              The final level adds roaming <em>$25&nbsp;cocktails</em> as enemies — a love letter to the absurdity of NYC.
+              An autobiographical maze game built with <strong>p5.js</strong> — six procedurally
+              generated levels, each a chapter of a life from a farm childhood to graduate school
+              in New York, collecting the artifacts that mark each period. Original music and sound,
+              with sprites and backgrounds generated via
+              <a href="https://nano-banana.com" target="_blank" rel="noopener">Nano Banana</a> and hand-curated.
             </p>
-            <p class="va-card__desc" style="margin-top: -0.25rem;">
-              Character sprites, item illustrations, and backgrounds were generated with
-              <strong>Nano Banana</strong>, then hand-curated to fit the game's autobiographical tone.
-            </p>
-            <div style="display:flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; margin-top: 0.25rem;">
-              <a href="https://lupitavsqf.github.io/autobiographical-game" target="_blank" rel="noopener" class="pub-link">Open full screen ↗</a>
-              <span class="va-card__credit">Images: <a href="https://nano-banana.com" target="_blank" rel="noopener">Nano Banana</a></span>
-            </div>
+            <a href="https://lupitavsqf.github.io/autobiographical-game" target="_blank" rel="noopener" class="pub-link">Open full screen ↗</a>
           </div>
         </article>
       </div>
