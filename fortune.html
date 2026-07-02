@@ -647,14 +647,74 @@
       return fortunes[i];
     }
 
+    // ---- BPM logic ----
+    // Starting point is chosen once, at random, from one of these ranges.
+    const bpmStartRanges = [
+      [60, 63],
+      [64, 68],
+      [75, 79],
+      [80, 82],
+      [83, 86],
+    ];
+    // Each turn (each fortune pull) the BPM shifts by a random step from one of these sets.
+    // Below 100 BPM: mostly flat/small climbs. Above 100 BPM: can also drift back down.
+    const bpmStepValuesNormal = [0, 0, 1, 2];
+    const bpmStepValuesHigh = [-2, -1, 0, 0, 0, 1, 2, 3];
+    const CORNELL_BONUS = 7; // extra bump when the fortune name-drops Cornell/Ithaca
+    const BPM_FLOOR = 55;
+    const BPM_CEILING = 140; // safety cap so it can't climb forever
+
+    function randInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function pickStartingBpm() {
+      const [lo, hi] = bpmStartRanges[randInt(0, bpmStartRanges.length - 1)];
+      return randInt(lo, hi);
+    }
+
+    function pickBpmStep(fromBpm) {
+      const pool = fromBpm > 100 ? bpmStepValuesHigh : bpmStepValuesNormal;
+      return pool[randInt(0, pool.length - 1)];
+    }
+
+    function mentionsCornellOrIthaca(text) {
+      if (!text) return false;
+      return /cornell|ithaca/i.test(text);
+    }
+
+    function animateBpmTo(target, onDone) {
+      clearInterval(bpmInterval);
+      const bpmEl = document.getElementById('bpm');
+      const start = currentBpm;
+      let steps = 0;
+      const totalSteps = 8;
+      const spikeInterval = setInterval(() => {
+        steps++;
+        const spike = Math.round(start + ((target - start) * steps) / totalSteps);
+        bpmEl.textContent = spike;
+        if (steps >= totalSteps) {
+          clearInterval(spikeInterval);
+          currentBpm = target;
+          bpmEl.textContent = currentBpm;
+          if (onDone) onDone();
+        }
+      }, 120);
+    }
+
+    // baseBpm is the "official" reading — it only ever moves once per turn (per fortune).
+    // currentBpm is what's displayed; it oscillates gently around baseBpm between turns
+    // purely for visual/heartbeat flavor, and snaps to baseBpm right after a turn resolves.
+    let baseBpm = pickStartingBpm();
+    let currentBpm = baseBpm;
     let bpmInterval;
-    let currentBpm = Math.floor(Math.random() * 30) + 62;
 
     function simulateBpm() {
       clearInterval(bpmInterval);
       bpmInterval = setInterval(() => {
-        const delta = Math.random() > 0.5 ? 1 : -1;
-        currentBpm = Math.max(58, Math.min(110, currentBpm + delta));
+        // gentle idle wobble, tethered to baseBpm so it never drifts on its own
+        const wobble = Math.random() > 0.5 ? 1 : -1;
+        currentBpm = Math.max(baseBpm - 2, Math.min(baseBpm + 2, currentBpm + wobble));
         document.getElementById('bpm').textContent = currentBpm;
       }, 900);
     }
@@ -669,17 +729,12 @@
 
       textEl.classList.add('fading');
 
-      let spike = currentBpm;
-      let steps = 0;
-      const spikeInterval = setInterval(() => {
-        spike = Math.min(118, spike + Math.floor(Math.random() * 4));
-        bpmEl.textContent = spike;
-        steps++;
-        if (steps > 8) {
-          clearInterval(spikeInterval);
-          simulateBpm();
-        }
-      }, 120);
+      // This turn's official BPM shift, drawn from the pool matching the current reading
+      const step = pickBpmStep(baseBpm);
+      baseBpm = Math.max(BPM_FLOOR, Math.min(BPM_CEILING, baseBpm + step));
+
+      // Animate the display moving to the new baseBpm for dramatic effect
+      await new Promise(resolve => animateBpmTo(baseBpm, resolve));
 
       await new Promise(r => setTimeout(r, 1400));
 
@@ -704,7 +759,7 @@
               role: "user",
               content: `You are "The Most Accurate Fortune Teller" — a satirical AI artwork that parodies pseudoscience and fortune-telling. You generate vague-but-emotionally-resonant fortune messages that seem profound but are intentionally constructed to expose how easily people attribute meaning to ambiguous outputs when framed with emotional cues.
 
-The user's current heart rate reading: ${spike} BPM.
+The user's current heart rate reading: ${baseBpm} BPM.
 
 Build this fortune around exactly this theme: "${chosenTheme}"
 
@@ -731,16 +786,28 @@ Return ONLY the short phrase, nothing else. No preamble, no quotation marks.`
 
         const data = await response.json();
         const msg = data?.content?.[0]?.text?.trim();
+        const finalFortune = msg || pickFortune();
 
         await new Promise(r => setTimeout(r, 200));
         textEl.classList.remove('fading');
-        textEl.innerHTML = msg ? `<em>${msg}</em>` : `<em>${pickFortune()}</em>`;
+        textEl.innerHTML = `<em>${finalFortune}</em>`;
+
+        if (mentionsCornellOrIthaca(finalFortune)) {
+          baseBpm = Math.max(BPM_FLOOR, Math.min(BPM_CEILING, baseBpm + CORNELL_BONUS));
+          await new Promise(resolve => animateBpmTo(baseBpm, resolve));
+        }
       } catch {
         const fallback = pickFortune();
         textEl.classList.remove('fading');
         textEl.innerHTML = `<em>${fallback}</em>`;
+
+        if (mentionsCornellOrIthaca(fallback)) {
+          baseBpm = Math.max(BPM_FLOOR, Math.min(BPM_CEILING, baseBpm + CORNELL_BONUS));
+          await new Promise(resolve => animateBpmTo(baseBpm, resolve));
+        }
       }
 
+      simulateBpm();
       btn.disabled = false;
       btn.textContent = 'Consult the Oracle Again';
     }
