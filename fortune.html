@@ -274,6 +274,29 @@
       box-shadow: 0 0 14px rgba(209,0,184,0.25);
       animation: stampIn 0.3s cubic-bezier(0.34,1.56,0.64,1) 0.8s both;
     }
+    .invite-card {
+      margin-bottom: 3rem;
+    }
+    .invite-caption {
+      font-size: 0.88rem; line-height: 1.75; opacity: 0.82;
+      margin-bottom: 1.25rem;
+    }
+    .invite-caption em { font-style: italic; opacity: 1; }
+    .invite-screenshot {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(209,0,184,0.25);
+      box-shadow: 0 0 30px rgba(209,0,184,0.1);
+      background: #0a0a0a;
+    }
+    .invite-screenshot img {
+      width: 100%; height: auto; display: block;
+    }
+    .invite-note {
+      font-size: 0.75rem; opacity: 0.4;
+      letter-spacing: 0.05em; margin-top: 0.75rem;
+    }
     .fortune-machine {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(209,0,184,0.2);
@@ -513,15 +536,27 @@
     <div class="rebuttal-card">
       <p class="rebuttal-label">Author's Response</p>
       <p class="rebuttal-text">
-        That the interaction design "feels arbitrary" is exactly the point. A fortune teller that gives you <em>calm</em> messages when you're calm and <em>anxious</em> ones when you're anxious would be a wellness app — not a provocation. The friction is the critique. The frustration is the artwork.
+        This started with fortune teller games — the kind everyone's played at a party or a sleepover. Given the program's utopia/dystopia theme, that felt exactly right: every one of those games has the same thing at its core, an uncertainty about the future, and a fortune teller is always more fun as a group activity than alone.
         <br /><br />
-        "Technically minimal" is also a conceptual statement: the piece demonstrates that you don't need technical depth to produce perceived profundity. Three scripted responses and a pulse sensor are enough to make people believe in prophecy. That <em>is</em> the argument.
+        The object itself is a resin heart with a vibrating sensor inside, controlled by four knobs that let you personalize its heartbeat pattern before a session starts. The goal was simple: make something interesting enough to hold that it primes the person to actually be receptive to what comes next. That part is a direct nod to the psychics I grew up around in Mexico, who often lead people through small rituals meant to ease them into a state where they're more susceptible to "enlightenment" — or at least more open to a new idea. A screen shows the instructions and the fortune, an infrared sensor picks up a wave of the hand to trigger a reading, and a speaker plays a suitably dramatic, magical tone while the message loads.
         <br /><br />
-        Furthermore, this was a final project for the semester Spring 2025 — built in weeks, not years. NeurIPS got a philosophical satire that made its thesis <em>through</em> its limitations. The board of reviewers, meanwhile, proved the thesis by failing to recognize the epistemic trap they were already standing in.
+        None of that technical layer was there to prove the fortunes are accurate — it was there to demonstrate the opposite. As creators, it's easy to assume that because we put real effort into technical features, the project must therefore work, or mean something. That's an uncomfortable thing to admit about your own work: technical complexity doesn't guarantee actual insight, and can just as easily be used to dress up nonsense. It's worth asking yourself that question directly, or you risk becoming a pseudo-science practitioner without noticing.
+        <br /><br />
+        The set was also deliberately made to look thrown-together, because that's how real fortune-telling sessions usually look — improvised, a little makeshift. Some read that as laziness. It was a conscious choice, and honestly the same argument as the tech, aimed at the aesthetics instead.
         <br /><br />
         With full respect and considerable amusement:
       </p>
       <span class="rebuttal-stamp">Rejection rejected.</span>
+    </div>
+
+    <div class="invite-card">
+      <p class="invite-caption">
+        Some time later, the same conference invited its author to <em>review</em> submissions for the 40th NeurIPS, Creative Track. The machine notes this without comment. The machine assumes you'll draw your own conclusion.
+      </p>
+      <div class="invite-screenshot">
+        <img src="reviewer-invite.png" alt="Screenshot of invitation to review for the 40th NeurIPS Creative Track" />
+      </div>
+      <p class="invite-note">Invitation screenshot · NeurIPS 40th Edition, Creative Track</p>
     </div>
 
     <h2 class="section-heading">Another Fortune, Since You're Here</h2>
