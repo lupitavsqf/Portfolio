@@ -94,9 +94,56 @@
       font-family: var(--font-display);
       font-size: clamp(1.8rem, 5vw, 3.2rem);
       letter-spacing: 0.04em;
-      line-height: 1.2;
+      line-height: 1.65;
       margin-bottom: 0.75rem;
-      text-shadow: 0 0 40px rgba(209,0,184,0.3);
+      animation: fireFlicker 1.6s ease-in-out infinite alternate;
+    }
+    @keyframes fireFlicker {
+      0% {
+        text-shadow:
+          0 0 3px #fff8fc,
+          0 -2px 5px rgba(255,127,228,0.85),
+          0 -5px 9px rgba(238,63,206,0.65),
+          0 -8px 14px rgba(209,0,184,0.45),
+          0 -12px 20px rgba(255,47,180,0.28),
+          0 -17px 26px rgba(176,0,126,0.14);
+      }
+      25% {
+        text-shadow:
+          0 0 3px #fff,
+          0 -2px 4px rgba(255,156,236,0.85),
+          0 -4px 8px rgba(241,79,214,0.6),
+          0 -7px 12px rgba(217,0,192,0.42),
+          0 -10px 18px rgba(255,69,188,0.25),
+          0 -14px 22px rgba(161,0,116,0.12);
+      }
+      50% {
+        text-shadow:
+          0 0 4px #fff8fc,
+          0 -3px 6px rgba(255,111,224,0.9),
+          0 -6px 10px rgba(232,54,200,0.68),
+          0 -9px 16px rgba(207,0,178,0.48),
+          0 -13px 22px rgba(255,47,174,0.3),
+          0 -19px 28px rgba(184,0,138,0.15);
+      }
+      75% {
+        text-shadow:
+          0 0 3px #fff,
+          0 -2px 5px rgba(255,160,238,0.82),
+          0 -5px 9px rgba(240,80,212,0.6),
+          0 -8px 14px rgba(219,0,194,0.4),
+          0 -11px 19px rgba(255,79,190,0.24),
+          0 -15px 24px rgba(150,0,108,0.1);
+      }
+      100% {
+        text-shadow:
+          0 0 4px #fff8fc,
+          0 -3px 6px rgba(255,95,216,0.92),
+          0 -6px 11px rgba(224,48,192,0.7),
+          0 -10px 17px rgba(209,0,184,0.5),
+          0 -14px 23px rgba(255,47,176,0.32),
+          0 -20px 30px rgba(164,0,124,0.16);
+      }
     }
     .hero-sub {
       font-size: 0.9rem; font-weight: 700;
@@ -606,7 +653,7 @@
       "There is no bad from which good doesn't come.",
       "Whoever does it, pays for it.",
       "Not all that glitters is gold.",
-      "Ithaca is reviewing an idea suspiciously like this one.",
+      "An Ivy League is reviewing an idea suspiciously like this one.",
       "Citations are optional for thieves.",
       "It's much better to be feared than loved, if you cannot be both.",
       "Appear weak when you are strong, and strong when you are weak.",
@@ -627,11 +674,11 @@
       "PLAGIARIZE: to take the thought or style of another writer whom one has never, never read.", 
       "ENVY: emulation adapted to the meanest capacity.",
       "This will outlive its own rejection.",
-      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
-      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
-      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
-      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
-      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
+      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
+      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
+      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
+      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
+      "In life there is rarely any emergencies; it is mostly idiots in a hurry", 
       "Forwarded. Screenshotted. Uncredited. Eventually.",
       "He who kills with iron shall die by iron",
       "Borrowed ideas still need their own fortune.",
@@ -665,7 +712,7 @@
     // Below 100 BPM: mostly flat/small climbs. Above 100 BPM: can also drift back down.
     const bpmStepValuesNormal = [0, 0, 1, 2];
     const bpmStepValuesHigh = [-2, -1, 0, 0, 0, 1, 2, 3];
-    const CORNELL_BONUS = 7; // extra bump when the fortune name-drops Cornell/Ithaca
+    const IVY_BONUS = 7; // extra bump when the fortune name-drops the Ivy League
     const BPM_FLOOR = 55;
     const BPM_CEILING = 140; // safety cap so it can't climb forever
 
@@ -683,9 +730,9 @@
       return pool[randInt(0, pool.length - 1)];
     }
 
-    function mentionsCornellOrIthaca(text) {
+    function mentionsIvyLeague(text) {
       if (!text) return false;
-      return /cornell|ithaca/i.test(text);
+      return /ivy league/i.test(text);
     }
 
     function animateBpmTo(target, onDone) {
@@ -749,7 +796,7 @@
         "to foresee the future, look to the past",
         "the crowd is satisfied by appearances; only a few look deeper",
         "people who fear the truth dress it up in flattering language",
-        "this exact artwork/fortune will get screenshotted, copied without credit, or quietly repurposed in someone's grad-school application — Cornell can be named as a wink"
+        "this exact artwork/fortune will get screenshotted, copied without credit, or quietly repurposed in someone's grad-school application — 'the Ivy League' can be named as a wink, but never a specific school"
       ];
       const chosenTheme = themePool[Math.floor(Math.random() * themePool.length)];
 
@@ -797,8 +844,8 @@ Return ONLY the short phrase, nothing else. No preamble, no quotation marks.`
         textEl.classList.remove('fading');
         textEl.innerHTML = `<em>${finalFortune}</em>`;
 
-        if (mentionsCornellOrIthaca(finalFortune)) {
-          baseBpm = Math.max(BPM_FLOOR, Math.min(BPM_CEILING, baseBpm + CORNELL_BONUS));
+        if (mentionsIvyLeague(finalFortune)) {
+          baseBpm = Math.max(BPM_FLOOR, Math.min(BPM_CEILING, baseBpm + IVY_BONUS));
           await new Promise(resolve => animateBpmTo(baseBpm, resolve));
         }
       } catch {
@@ -806,8 +853,8 @@ Return ONLY the short phrase, nothing else. No preamble, no quotation marks.`
         textEl.classList.remove('fading');
         textEl.innerHTML = `<em>${fallback}</em>`;
 
-        if (mentionsCornellOrIthaca(fallback)) {
-          baseBpm = Math.max(BPM_FLOOR, Math.min(BPM_CEILING, baseBpm + CORNELL_BONUS));
+        if (mentionsIvyLeague(fallback)) {
+          baseBpm = Math.max(BPM_FLOOR, Math.min(BPM_CEILING, baseBpm + IVY_BONUS));
           await new Promise(resolve => animateBpmTo(baseBpm, resolve));
         }
       }
