@@ -25,8 +25,8 @@
       /* Caravaggio detail crop — tune these two to frame the hands/ring exactly.
          --detail-zoom is how far in; --detail-x / --detail-y are background-position. */
       --detail-zoom:  260%;
-      --detail-x:     50%;
-      --detail-y:     64%;
+      --detail-x:     44%;
+      --detail-y:     70%;
     }
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
@@ -434,6 +434,21 @@
       border-left: 2px solid var(--red-border);
       padding-left: 1.5rem;
     }
+    .author-note {
+      margin-top: 2rem;
+      padding: 1.75rem 2rem;
+      border: 1px solid rgba(209,0,184,0.22);
+      border-radius: 14px;
+      background: rgba(209,0,184,0.05);
+    }
+    .author-note__label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #e060d8; opacity: 0.85;
+      margin-bottom: 0.9rem;
+    }
+    .author-note p { font-size: 0.9rem; line-height: 1.85; opacity: 0.85; }
+    .author-note p + p { margin-top: 1rem; }
+    .author-note strong { color: var(--white); font-weight: 700; opacity: 1; }
 
     /* ---------- Review + rebuttal ---------- */
     .review-card {
@@ -680,6 +695,12 @@
     <p class="section-eyebrow">The work</p>
     <h2 class="section-heading">What it is</h2>
 
+    <p class="section-lede">
+      A physical toy, built for a utopia/dystopia brief in the MFA Design and Technology program
+      at Parsons in spring 2025. It was submitted to the NeurIPS Creative AI Track afterward — the
+      conference is where it was judged, not where it came from.
+    </p>
+
     <div class="abstract-block">
       <p class="abstract-label">Abstract</p>
       <p class="abstract-text">
@@ -694,7 +715,7 @@
       <span class="pill pill--pink">Biofeedback</span>
       <span class="pill pill--pink">Heart Rate</span>
       <span class="pill pill--pink">Fortune Telling</span>
-      <span class="pill pill--red">Spring 2025 Final Project</span>
+      <span class="pill pill--red">Parsons · Spring 2025 final project</span>
       <span class="pill pill--gray">Track: Artwork</span>
     </div>
 
@@ -814,6 +835,21 @@
       That is the sleight of hand this toy exists to hand back to you: is AI, like the woman in the painting,
       divining your fate, or flattering your hope? What are you handing over, unnoticed, in the name of insight?
     </p>
+
+    <div class="author-note">
+      <p class="author-note__label">Why the seams are showing</p>
+      <p>
+        The aim was never to fool you. It was to hand you the mechanism of the deception while you
+        are still standing inside it. So the distance between what the algorithm actually knows
+        about you — a pulse — and what it appears to know — your future — is
+        <strong>exaggerated on purpose</strong>. That contrast is the design choice.
+      </p>
+      <p>
+        A smoother version was always available. Make the seams invisible and it stops being a
+        demonstration: you walk away holding a fortune instead of the machinery that produced it,
+        and the point is missed. The toy has to be caught to work.
+      </p>
+    </div>
   </section>
 
   <hr class="section-rule" />
@@ -937,13 +973,21 @@
       <p class="rebuttal-label">Author's response</p>
       <div class="rebuttal-text">
         <p>
-          This started with fortune teller games — the kind everyone's played at a party or a sleepover. Given the program's utopia/dystopia theme, that felt exactly right: every one of those games has the same thing at its core, an uncertainty about the future, and a fortune teller is always more fun as a group activity than alone.
+          This started with fortune teller games — the kind everyone's played at a party or a sleepover. It began as a final project at Parsons, where the semester's theme was utopia/dystopia, and that felt exactly right: every one of those games has the same thing at its core, an uncertainty about the future, and a fortune teller is always more fun as a group activity than alone.
         </p>
         <p>
           The object itself is a resin heart with a vibrating sensor inside, controlled by four knobs that let you personalize its heartbeat pattern before a session starts. The goal was simple: make something interesting enough to hold that it primes the person to actually be receptive to what comes next. That part is a direct nod to the psychics I grew up around in Mexico, who often lead people through small rituals meant to ease them into a state where they're more susceptible to "enlightenment" — or at least more open to a new idea. A screen shows the instructions and the fortune, an infrared sensor picks up a wave of the hand to trigger a reading, and a speaker plays a suitably dramatic, magical tone while the message loads.
         </p>
         <p>
           None of that technical layer was there to prove the fortunes are accurate — it was there to demonstrate the opposite. As creators, it's easy to assume that because we put real effort into technical features, the project must therefore work, or mean something. That's an uncomfortable thing to admit about your own work: technical complexity doesn't guarantee actual insight, and can just as easily be used to dress up nonsense. It's worth asking yourself that question directly, or you risk becoming a pseudo-science practitioner without noticing.
+        </p>
+        <p>
+          Which is also why it stops where it stops. It is meaningless to spend real engineering time
+          on something that can be explained more elegantly without it. A pulse and three scripted sets
+          produce the entire effect; anything more would have been me proving I hadn't understood my own
+          argument. Calling that minimal is fair. Calling it a weakness assumes the technology was
+          supposed to be the achievement — and if it had been, the piece would have been the very thing
+          it is about.
         </p>
         <p>
           The set was also deliberately made to look thrown-together, because that's how real fortune-telling sessions usually look — improvised, a little makeshift. Some read that as laziness. It was a conscious choice, and honestly the same argument as the tech, aimed at the aesthetics instead.
